@@ -32,7 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
               scale: 8,
             ),
             const SizedBox(height: 30),
-            const ReusableLoadingWidget()
+            const ReusableLoadingWidget(
+              isBlack: true,
+            )
           ],
         ),
       ),

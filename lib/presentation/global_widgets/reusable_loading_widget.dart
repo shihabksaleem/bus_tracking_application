@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class ReusableLoadingWidget extends StatelessWidget {
-  const ReusableLoadingWidget({super.key, this.isBlack = false});
+  const ReusableLoadingWidget({super.key, this.isBlack = true});
   final bool isBlack;
 
   @override
