@@ -1,6 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/user_home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class UserTypeSelectionScreen extends StatelessWidget {
   const UserTypeSelectionScreen({super.key});
@@ -21,26 +23,65 @@ class UserTypeSelectionScreen extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    color: Colors.yellow,
-                    child: Center(child: Text("user 1")),
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.yellow,
+                          borderRadius: BorderRadius.circular(10)),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Center(
+                          child: Text(
+                        "Admin",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      )),
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    color: Colors.red,
-                    child: Center(child: Text("user 1")),
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.yellow,
+                          borderRadius: BorderRadius.circular(10)),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Center(
+                          child: Text(
+                        "Owner",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      )),
+                    ),
                   ),
                 ),
               ],
             ),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              color: Colors.yellow,
-              child: Center(child: Text("user 1")),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserHomeScreen(),
+                      ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.circular(10)),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Center(
+                      child: Text(
+                    "User",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  )),
+                ),
+              ),
             ),
           ],
         ),
