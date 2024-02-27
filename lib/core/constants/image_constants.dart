@@ -1,3 +1,5 @@
 class ImageConstants {
-  static const String appLogopng = "assets/images/bus_logo.png";
+  static const String appLogopngPng = "assets/images/bus_logo.png";
+
+  static const String bustrackingImgJpg = "assets/images/bus_tracking_img.jpg";
 }
