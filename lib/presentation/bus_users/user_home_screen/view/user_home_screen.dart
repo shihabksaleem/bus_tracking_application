@@ -1,5 +1,6 @@
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class UserHomeScreen extends StatelessWidget {
@@ -29,6 +30,34 @@ class UserHomeScreen extends StatelessWidget {
                     color: Colors.blue,
                   ),
                   border: OutlineInputBorder(borderSide: BorderSide.none)),
+            ),
+            Spacer(),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                  children: List.generate(
+                10,
+                (index) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    color: Colors.grey,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.message, color: Colors.green),
+                            SizedBox(width: 20),
+                            Text("Location")
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Text("2 km")
+                      ],
+                    ),
+                  ),
+                ),
+              )),
             )
           ],
         ),
