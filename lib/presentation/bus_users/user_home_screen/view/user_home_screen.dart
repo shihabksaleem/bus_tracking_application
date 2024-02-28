@@ -32,6 +32,9 @@ class UserHomeScreen extends StatelessWidget {
                   border: OutlineInputBorder(borderSide: BorderSide.none)),
             ),
             Spacer(),
+
+            //#2 Sujested locations
+
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -41,7 +44,7 @@ class UserHomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     padding: EdgeInsets.all(10),
-                    color: Colors.grey,
+                    color: ColorConstants.mainWhite,
                     child: Column(
                       children: [
                         Row(
