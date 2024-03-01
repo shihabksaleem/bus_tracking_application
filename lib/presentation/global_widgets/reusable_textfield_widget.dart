@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ReusableTextFieldWidget extends StatelessWidget {
   ReusableTextFieldWidget(
@@ -19,7 +20,7 @@ class ReusableTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextField(style: GoogleFonts.roboto(fontSize: 22, fontWeight: FontWeight.bold),
       controller: controller,
       obscureText: isObscure,
       keyboardType: textInputType,
