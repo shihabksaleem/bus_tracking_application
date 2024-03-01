@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatelessWidget {
-  TextFieldWidget(
+class ReusableTextFieldWidget extends StatelessWidget {
+  ReusableTextFieldWidget(
       {super.key,
       required this.name,
       required this.controller,
