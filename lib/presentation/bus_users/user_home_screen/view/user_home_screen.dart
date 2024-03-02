@@ -6,9 +6,12 @@ import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../user_home_screen_2/view/user_home_screen_2.dart';
+
 class UserHomeScreen extends StatelessWidget {
   const UserHomeScreen({super.key});
-
+final String name="Location";
+final String distance="1 Km(2 min)";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,30 +143,36 @@ class UserHomeScreen extends StatelessWidget {
                 10,
                 (index) => Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset(4, 6),
-                              blurRadius: 8,
-                              color: ColorConstants.mainBlack.withOpacity(.5))
-                        ]),
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(Icons.message, color: Colors.green),
-                            SizedBox(width: 20),
-                            Text("Location")
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        Text("2 km")
-                      ],
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => UserHomeScreen2(name: name,timing: distance,)));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(4, 6),
+                                blurRadius: 8,
+                                color: ColorConstants.mainBlack.withOpacity(.5))
+                          ]),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(Icons.message, color: Colors.green),
+                              SizedBox(width: 20),
+                              Text(name)
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Text(distance)
+                        ],
+                      ),
                     ),
                   ),
                 ),
