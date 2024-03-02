@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
-import 'package:bus_tracking_application/presentation/common_screen/user_type_selection_screen/view/user_type_selection_screen.dart';
+import 'package:bus_tracking_application/presentation/common_screen/get_started_screen/view/get_started_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => UserTypeSelectionScreen(),
+            builder: (context) => GetStartedScreen(),
           ));
     });
     super.initState();
