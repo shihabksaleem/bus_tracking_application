@@ -22,17 +22,16 @@ class UserHomeScreen3 extends StatelessWidget {
       ),
       body: Column(
         children: [
+          //first widget to show the map
           Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.4,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(ImageConstants.mapSampleImageJpg),
                   fit: BoxFit.cover),
             ),
           ),
+          //second widget
           Container(
             padding: const EdgeInsets.all(12),
             height: 50,
@@ -52,24 +51,19 @@ class UserHomeScreen3 extends StatelessWidget {
                       color: ColorConstants.mainBlack)),
             ),
           ),
-
+          //third widget using Timeline tile
           Expanded(
-            child:
-
-            ListView.builder(
+            child: ListView.builder(
                 itemCount: 4,
                 shrinkWrap: true,
                 itemBuilder: (context, index) =>
-                    SizedBox(
-                        height: 90,
-                        child:
-
-                        TimeLineWidget(index))),
+                    SizedBox(height: 90, child: TimeLineWidget(index))),
           ),
         ],
       ),
     );
   }
+
   Widget TimeLineWidget(int index) {
     return TimelineTile(
       alignment: TimelineAlign.manual,
@@ -80,10 +74,12 @@ class UserHomeScreen3 extends StatelessWidget {
           width: 40,
           height: 30,
           color: index == 0 ? Colors.grey : ColorConstants.iconBlue,
-          iconStyle:
-          IconStyle(iconData: Icons.directions_bus)),
-      afterLineStyle: const LineStyle(thickness: 2, color: Colors.grey,),
-      beforeLineStyle: LineStyle(
+          iconStyle: IconStyle(iconData: Icons.directions_bus)),
+      afterLineStyle: const LineStyle(
+        thickness: 2,
+        color: Colors.grey,
+      ),
+      beforeLineStyle: const LineStyle(
         thickness: 2,
         color: Colors.red,
       ),
@@ -100,8 +96,10 @@ class UserHomeScreen3 extends StatelessWidget {
       ),
       endChild: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Text("Bus route name", style: TextStyle(
-          color: index == 0 ? Colors.grey : ColorConstants.iconBlue,)),
+        child: Text("Bus route name",
+            style: TextStyle(
+              color: index == 0 ? Colors.grey : ColorConstants.iconBlue,
+            )),
       ),
     );
   }
