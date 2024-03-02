@@ -20,7 +20,8 @@ class ReusableTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(style: GoogleFonts.roboto(fontSize: 22, fontWeight: FontWeight.bold),
+    return TextField(
+      style: GoogleFonts.roboto(fontSize: 22, fontWeight: FontWeight.bold),
       controller: controller,
       obscureText: isObscure,
       keyboardType: textInputType,
