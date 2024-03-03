@@ -24,22 +24,22 @@ class GetStartedScreen extends StatelessWidget {
                   onTap: () {
                     // navigate to bus user
                   },
-                  child: Text("Bus user"),
                   value: '/user',
+                  child: Text("Bus user"),
                 ),
-                PopupMenuItem(
-                  onTap: () {
-                    // navigate to owner screen
-                  },
-                  child: Text("Owner"),
-                  value: '/owner',
-                ),
+                // PopupMenuItem(
+                //   onTap: () {
+                //     // navigate to owner screen
+                //   },
+                //   child: Text("Owner"),
+                //   value: '/owner',
+                // ),
                 PopupMenuItem(
                   onTap: () {
                     // navigate to admin screen
                   },
-                  child: Text("Adim"),
                   value: '/admin',
+                  child: Text("Adim"),
                 )
               ];
             },
