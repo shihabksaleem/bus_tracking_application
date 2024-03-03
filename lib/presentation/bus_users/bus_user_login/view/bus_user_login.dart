@@ -1,3 +1,4 @@
+import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_users/bus_user_registration/view/bus_user_registration.dart';
 import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/user_home_screen.dart';
@@ -38,14 +39,14 @@ class BusUserLogin extends StatelessWidget {
                     children: [
                       //first widget
                       ReusableTextFieldWidget(
-                          prefixIcon: const Icon(Icons.email, color: Colors.blue),
+                          prefixIcon: const Icon(Icons.email, color: ColorConstants.iconBlue),
                           name: "Email Address",
                           controller: userNameController,
                           keyboardType: TextInputType.emailAddress),
                       //second widget for password
 
                       ReusableTextFieldWidget(
-                        prefixIcon: const Icon(Icons.password, color: Colors.blue),
+                        prefixIcon: const Icon(Icons.password, color:ColorConstants.iconBlue),
                         name: "Password",
                         controller: passwordController,
                         keyboardType: TextInputType.number,

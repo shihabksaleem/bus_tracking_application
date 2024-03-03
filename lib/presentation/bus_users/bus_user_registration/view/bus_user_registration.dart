@@ -2,6 +2,7 @@ import 'package:bus_tracking_application/presentation/bus_users/bus_user_login/v
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/constants/color_constants.dart';
 import '../../../../core/constants/image_constants.dart';
 import '../../../global_widgets/reusable_textfield_widget.dart';
 
@@ -48,20 +49,20 @@ class BusUserRegistration extends StatelessWidget {
                     children: [
                       //first widget
                       ReusableTextFieldWidget(
-                          prefixIcon: const Icon(Icons.email, color: Colors.blue),
+                          prefixIcon: const Icon(Icons.email, color: ColorConstants.iconBlue),
                           name: "UserName",
                           controller: userNameController,
                           keyboardType: TextInputType.emailAddress),
                       //second widget
                       ReusableTextFieldWidget(
-                          prefixIcon: const Icon(Icons.email, color: Colors.blue),
+                          prefixIcon: const Icon(Icons.email, color: ColorConstants.iconBlue),
                           name: "Email Address",
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress),
                       //Third widget
 
                       ReusableTextFieldWidget(
-                        prefixIcon: const Icon(Icons.password, color: Colors.blue),
+                        prefixIcon: const Icon(Icons.password, color: ColorConstants.iconBlue),
                         name: "Password",
                         controller: passwordController,
                         keyboardType: TextInputType.number,
