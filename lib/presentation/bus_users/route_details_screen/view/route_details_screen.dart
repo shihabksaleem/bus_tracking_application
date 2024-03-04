@@ -2,10 +2,11 @@ import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/user_home_screen.dart';
 import 'package:flutter/material.dart';
-import '../../user_home_screen_3/view/user_home_screen_3.dart';
+import '../../bus_tracking_screen/view/bus_tracking_screen.dart';
 
-class UserHomeScreen2 extends StatelessWidget {
-  const UserHomeScreen2({super.key, required this.name,required this.timing});
+class RouteDetailsScreen extends StatelessWidget {
+  const RouteDetailsScreen(
+      {super.key, required this.name, required this.timing});
 
   final String name;
   final String timing;
@@ -118,10 +119,8 @@ class UserHomeScreen2 extends StatelessWidget {
                           ),
                           IconButton(
                               onPressed: () {
-                                Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            UserHomeScreen3()));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => BusTrackingScreen()));
                               },
                               icon: const Icon(Icons.arrow_forward))
                         ],

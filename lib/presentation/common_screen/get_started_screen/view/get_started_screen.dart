@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/admin/admin_login/view/admin_login_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login/view/bus_owner_login.dart';
 import 'package:bus_tracking_application/presentation/bus_users/bus_user_login/view/bus_user_login.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +25,24 @@ class GetStartedScreen extends StatelessWidget {
                 PopupMenuItem(
                   onTap: () {
                     // navigate to bus user
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BusUserLogin(),
+                        ));
                   },
-                  child: Text("Bus user"),
                   value: '/user',
+                  child: Text("Bus user"),
                 ),
                 PopupMenuItem(
                   onTap: () {
                     // navigate to owner screen
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BusOwnerLoginScreen(),
+                        ));
                   },
                   child: Text("Owner"),
                   value: '/owner',
@@ -37,9 +50,14 @@ class GetStartedScreen extends StatelessWidget {
                 PopupMenuItem(
                   onTap: () {
                     // navigate to admin screen
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdminLoginScreen(),
+                        ));
                   },
-                  child: Text("Adim"),
                   value: '/admin',
+                  child: Text("Adim"),
                 )
               ];
             },
@@ -63,7 +81,9 @@ class GetStartedScreen extends StatelessWidget {
                       ));
                 },
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.yellow, borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.circular(10)),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Center(
                       child: Text(

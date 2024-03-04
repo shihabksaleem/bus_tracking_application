@@ -4,8 +4,8 @@ import 'package:timeline_tile/timeline_tile.dart';
 import '../../../../core/constants/color_constants.dart';
 import '../../../../core/constants/image_constants.dart';
 
-class UserHomeScreen3 extends StatelessWidget {
-  UserHomeScreen3({super.key});
+class BusTrackingScreen extends StatelessWidget {
+  const BusTrackingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
