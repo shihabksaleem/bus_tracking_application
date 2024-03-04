@@ -2,8 +2,6 @@
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
-import 'package:bus_tracking_application/presentation/bus_users/bus_tracking_screen/view/bus_tracking_screen.dart';
-import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/widget/home_screen_busses_card.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,6 +15,29 @@ class UserHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+            title: Text(
+          "",
+        )),
+        drawer: ReusableDrawerWidget(
+          name: 'name',
+          email: 'email',
+          drawerItems: [
+            DrawerItem(
+                icon: Icons.bus_alert, title: 'Nearby bus stops', onTap: () {}),
+            DrawerItem(
+                icon: Icons.directions_bus,
+                title: 'Track my bus',
+                onTap: () {}),
+            DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
+            DrawerItem(
+                icon: Icons.privacy_tip_outlined,
+                title: 'Terms & Condition',
+                onTap: () {}),
+            DrawerItem(
+                icon: Icons.power_settings_new, title: 'Logout', onTap: () {}),
+          ],
+        ),
         body: SafeArea(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 30),
