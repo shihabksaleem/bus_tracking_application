@@ -4,14 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../admin_registration/view/admin_registration_screen.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: AdminLogin(),
-  ));
-}
-
-class AdminLogin extends StatelessWidget {
-  AdminLogin({super.key});
+class AdminLoginScreen extends StatelessWidget {
+  AdminLoginScreen({super.key});
 
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -22,7 +16,7 @@ class AdminLogin extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(left: 12.0,right: 12,top: 50),
+            padding: const EdgeInsets.only(left: 12.0, right: 12, top: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -45,19 +39,20 @@ class AdminLogin extends StatelessWidget {
                     children: [
                       //first widget
                       ReusableTextFieldWidget(
-                          prefixIcon: const Icon(Icons.email, color: Colors.blue),
+                          prefixIcon:
+                              const Icon(Icons.email, color: Colors.blue),
                           name: "Email Address",
                           controller: userNameController,
                           keyboardType: TextInputType.emailAddress),
                       //second widget for password
 
                       ReusableTextFieldWidget(
-                        prefixIcon: const Icon(Icons.password, color: Colors.blue),
+                        prefixIcon:
+                            const Icon(Icons.password, color: Colors.blue),
                         name: "Password",
                         controller: passwordController,
                         keyboardType: TextInputType.number,
                         obscureText: true,
-
                       ),
                     ],
                   ),
@@ -72,7 +67,7 @@ class AdminLogin extends StatelessWidget {
                     child: ElevatedButton(
                       style: const ButtonStyle(
                           backgroundColor:
-                          MaterialStatePropertyAll(Colors.black),
+                              MaterialStatePropertyAll(Colors.black),
                           shape: MaterialStatePropertyAll(StadiumBorder())),
                       onPressed: () {},
                       child: const Text("Login",
@@ -87,19 +82,26 @@ class AdminLogin extends StatelessWidget {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => AdminRegistration()));
                       },
-                      child: RichText(text: TextSpan(
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: "Don't have an account?",
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        ),
+                        TextSpan(
+                          text: " Register",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold),
+                        )
+                      ]))
 
-                          children: [
-                            TextSpan(text: "Don't have an account?",style: TextStyle(fontSize: 15, color: Colors.black),),
-                            TextSpan(text: " Register",style: TextStyle(fontSize: 15, color: Colors.blue,fontWeight: FontWeight.bold),)
-                          ]
-                      ))
-
-                    // Text(
-                    //   "Don't have an account?Register Here!!",
-                    //   style: TextStyle(fontSize: 15, color: Colors.black),
-                    // ),
-                  ),
+                      // Text(
+                      //   "Don't have an account?Register Here!!",
+                      //   style: TextStyle(fontSize: 15, color: Colors.black),
+                      // ),
+                      ),
                 ),
               ],
             ),
@@ -109,4 +111,3 @@ class AdminLogin extends StatelessWidget {
     );
   }
 }
-
