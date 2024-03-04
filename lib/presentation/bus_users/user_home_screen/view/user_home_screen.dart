@@ -2,16 +2,18 @@
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/bus_users/bus_tracking_screen/view/bus_tracking_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/widget/home_screen_busses_card.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../user_home_screen_2/view/user_home_screen_2.dart';
+import '../../route_details_screen/view/route_details_screen.dart';
 
 class UserHomeScreen extends StatelessWidget {
   const UserHomeScreen({super.key});
-final String name="Location";
-final String distance="1 Km(2 min)";
+  final String name = "Location";
+  final String distance = "1 Km(2 min)";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,54 +82,8 @@ final String distance="1 Km(2 min)";
                   padding: EdgeInsets.all(10),
                   child: SingleChildScrollView(
                     child: Column(
-                      children: List.generate(
-                          10,
-                          (index) => Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0, vertical: 6),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: ColorConstants.mainWhite,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            offset: Offset(6, 6),
-                                            blurRadius: 8,
-                                            color: ColorConstants.mainBlack
-                                                .withOpacity(.6))
-                                      ]),
-                                  child: Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 30,
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Bus name"),
-                                          SizedBox(height: 3),
-                                          Text("Ac/non Ac"),
-                                          SizedBox(height: 3),
-                                          Text("1 stop away"),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Icon(
-                                        Icons.call_split_rounded,
-                                        color: ColorConstants.mainBlue,
-                                        size: 30,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )),
+                      children:
+                          List.generate(10, (index) => HomeScreenBussesCard()),
                     ),
                   ),
                 ),
@@ -146,7 +102,10 @@ final String distance="1 Km(2 min)";
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => UserHomeScreen2(name: name,timing: distance,)));
+                          builder: (context) => RouteDetailsScreen(
+                                name: name,
+                                timing: distance,
+                              )));
                     },
                     child: Container(
                       decoration: BoxDecoration(
