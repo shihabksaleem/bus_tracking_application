@@ -1,10 +1,10 @@
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login/view/bus_owner_login.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/view/bus_owner_registration_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BusOwnerRegistration extends StatelessWidget {
+class BusOwnerLoginScreen extends StatelessWidget {
   final ownerController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
@@ -22,7 +22,7 @@ class BusOwnerRegistration extends StatelessWidget {
               Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Bus Owner Registration",
+                    "Bus Owner Login",
                     style: GoogleFonts.roboto(
                         fontSize: 26, fontWeight: FontWeight.w500),
                   )),
@@ -31,15 +31,7 @@ class BusOwnerRegistration extends StatelessWidget {
               ),
               Center(
                 child: Column(children: [
-                  ///First widget for owner name
-                  ReusableTextFieldWidget(
-                    name: "Owner Name",
-                    prefixIcon: Icon(Icons.person),
-                    controller: ownerController,
-                    keyboardType: TextInputType.text,
-                  ),
-
-                  ///Second Widget for owners email address
+                  ///First Widget for owners email address
                   ReusableTextFieldWidget(
                     name: "Email Address",
                     prefixIcon: Icon(Icons.email),
@@ -47,7 +39,7 @@ class BusOwnerRegistration extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                   ),
 
-                  ///Third Widget for Owner password
+                  ///Second Widget for Owner password
                   ReusableTextFieldWidget(
                     name: "Password",
                     prefixIcon: Icon(Icons.password),
@@ -69,7 +61,7 @@ class BusOwnerRegistration extends StatelessWidget {
                                 MaterialStatePropertyAll(Colors.black),
                             shape: MaterialStatePropertyAll(StadiumBorder())),
                         onPressed: () {},
-                        child: const Text("Register",
+                        child: const Text("Login",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 25)),
                       )),
@@ -82,15 +74,16 @@ class BusOwnerRegistration extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => BusOwnerLoginScreen()));
+                              builder: (context) =>
+                                  BusOwnerRegistrationScreen()));
                     },
                     child: RichText(
                         text: TextSpan(children: [
                       TextSpan(
-                          text: "Already have an account ",
+                          text: "Don't have an account ",
                           style: TextStyle(fontSize: 15, color: Colors.black)),
                       TextSpan(
-                          text: "Login",
+                          text: "Register",
                           style: TextStyle(
                               fontSize: 15,
                               color: Colors.blue,
