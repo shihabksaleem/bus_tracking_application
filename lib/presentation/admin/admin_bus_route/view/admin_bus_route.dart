@@ -1,3 +1,4 @@
+import 'package:bus_tracking_application/presentation/admin/admin_bus_stop/view/admin_bus_Stop.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,10 @@ class AdminBusRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Bus Route "),
+          title: Text(
+            "Bus Route Adding",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -22,17 +26,31 @@ class AdminBusRoute extends StatelessWidget {
             itemBuilder: (context, index) {
               return Card(
                 child: ListTile(
-                  title: Text("Source:"),
-                  subtitle: Text("Destination"),
+                  title: Text(
+                    "Name: Kakknad to Aluva",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("From: Kakknad"),
+                      Text("To: Aluva"),
+                    ],
+                  ),
                   trailing: Wrap(
-                    // mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CircleAvatar(
-                        backgroundColor: Colors.green,
+                        backgroundColor:
+                            const Color.fromARGB(255, 130, 175, 212),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AdminBusStop()));
+                            },
                             icon: Icon(
-                              Icons.edit,
+                              Icons.add,
                               color: Colors.white,
                             )),
                       ),
@@ -47,7 +65,7 @@ class AdminBusRoute extends StatelessWidget {
                               Icons.delete,
                               color: Colors.white,
                             )),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -66,12 +84,17 @@ class AdminBusRoute extends StatelessWidget {
               children: [
                 ///first textfield for source input
                 ReusableTextFieldWidget(
-                  name: "Source",
+                  name: "Name",
                   keyboardType: TextInputType.text,
                   controller: sourceController,
                 ),
                 ReusableTextFieldWidget(
-                  name: "Destination",
+                  name: "From",
+                  keyboardType: TextInputType.text,
+                  controller: destinationController,
+                ),
+                ReusableTextFieldWidget(
+                  name: "To",
                   keyboardType: TextInputType.text,
                   controller: destinationController,
                 ),

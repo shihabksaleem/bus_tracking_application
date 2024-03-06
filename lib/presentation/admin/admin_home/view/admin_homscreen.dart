@@ -1,6 +1,5 @@
 import 'package:bus_tracking_application/presentation/admin/admin_Request/view/admin_request.dart';
 import 'package:bus_tracking_application/presentation/admin/admin_bus_route/view/admin_bus_route.dart';
-import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,17 +16,11 @@ class admin_Homescreen extends StatefulWidget {
 
 class _admin_HomescreenState extends State<admin_Homescreen> {
   int index = 0;
-  List bottomscreens = [AdminBusRoute(), AdminRequest()];
+  List bottomscreens = [AdminBusRoute(), AdminRequest(), AdminRequest()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(
-      //     "ADMIN",
-      //     style: TextStyle(fontWeight: FontWeight.bold),
-      //   ),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -47,7 +40,6 @@ class _admin_HomescreenState extends State<admin_Homescreen> {
         },
         currentIndex: index,
       ),
-
       body: bottomscreens[index],
     );
   }

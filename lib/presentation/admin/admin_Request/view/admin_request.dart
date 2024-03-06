@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:bus_tracking_application/presentation/admin/admin_busview/view/admin_busview.dart';
 import 'package:flutter/material.dart';
 
 class AdminRequest extends StatelessWidget {
@@ -6,44 +6,31 @@ class AdminRequest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Request"),
+        title: Text(
+          "Request",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return Card(
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              // Navigate to the AdminBusView page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AdminBusView()),
+              );
+            },
+            child: Card(
               child: ListTile(
                 title: Text("owner username"),
                 subtitle: Text("owner Email"),
-                trailing: Wrap(
-                  // mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.green,
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.check,
-                            color: Colors.white,
-                          )),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    CircleAvatar(
-                      backgroundColor: Colors.red,
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.close,
-                            color: Colors.white,
-                          )),
-                    )
-                  ],
-                ),
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 }
