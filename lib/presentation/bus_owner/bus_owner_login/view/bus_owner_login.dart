@@ -1,5 +1,6 @@
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration/view/bus_owner_registration.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,7 +61,13 @@ class BusOwnerLoginScreen extends StatelessWidget {
                             backgroundColor:
                                 MaterialStatePropertyAll(Colors.black),
                             shape: MaterialStatePropertyAll(StadiumBorder())),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OwnerHomeScreen(),
+                              ));
+                        },
                         child: const Text("Login",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 25)),
