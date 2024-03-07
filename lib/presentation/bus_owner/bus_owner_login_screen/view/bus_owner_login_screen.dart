@@ -75,7 +75,8 @@ class BusOwnerLoginScreen extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => BusOwnerRegistration()));
+                              builder: (context) =>
+                                  BusOwnerRegistrationScreen()));
                     },
                     child: RichText(
                         text: TextSpan(children: [
