@@ -38,7 +38,7 @@ class ApiHelper {
         if (isRequestSucceeded(res.statusCode)) {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
-          if (resBody['status'] == 1) {
+          if (resBody['status'] == 1 || res.statusCode == 200) {
             if (resBody['message'] != null) {
               AppUtils.oneTimeSnackBar(
                 resBody['message'] ?? "Success",
@@ -100,7 +100,7 @@ class ApiHelper {
         if (isRequestSucceeded(res.statusCode)) {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
-          if (resBody['status'] == 1) {
+          if (resBody['status'] == 1 || res.statusCode == 200) {
             if (resBody['message'] != null) {
               AppUtils.oneTimeSnackBar(
                 resBody['message'] ?? "Success",
@@ -167,7 +167,7 @@ class ApiHelper {
         if (isRequestSucceeded(res.statusCode)) {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
-          if (resBody['status'] == 1) {
+          if (resBody['status'] == 1 || res.statusCode == 200) {
             if (resBody['message'] != null) {
               AppUtils.oneTimeSnackBar(
                 resBody['message'] ?? "Success",
@@ -229,7 +229,7 @@ class ApiHelper {
         if (isRequestSucceeded(res.statusCode)) {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
-          if (resBody['status'] == 1) {
+          if (resBody['status'] == 1 || res.statusCode == 200) {
             if (resBody['message'] != null) {
               AppUtils.oneTimeSnackBar(
                 resBody['message'] ?? "Success",
