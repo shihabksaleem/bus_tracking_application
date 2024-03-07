@@ -2,185 +2,214 @@
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/controller/user_home_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/widget/home_screen_busses_card.dart';
+import 'package:bus_tracking_application/presentation/global_widgets/reusable_drawer_widget.dart';
+import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
-import '../../user_home_screen_2/view/user_home_screen_2.dart';
+import '../../route_details_screen/view/route_details_screen.dart';
 
-class UserHomeScreen extends StatelessWidget {
+class UserHomeScreen extends StatefulWidget {
   const UserHomeScreen({super.key});
-final String name="Location";
-final String distance="1 Km(2 min)";
+
+  @override
+  State<UserHomeScreen> createState() => _UserHomeScreenState();
+}
+
+class _UserHomeScreenState extends State<UserHomeScreen> {
+  final String name = "Location";
+
+  final String distance = "1 Km(2 min)";
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<UserHomeScreenController>(context, listen: false)
+          .getRoutesList();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userHomeScreenState = Provider.of<UserHomeScreenController>(context);
     return Scaffold(
-        body: SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 30),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                  ImageConstants.mapSampleImageJpg,
-                ),
-                fit: BoxFit.cover)),
-        child: Column(
-          children: [
-            //#1 search widget
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          offset: const Offset(4, 6),
-                          blurRadius: 8,
-                          color: ColorConstants.mainBlack.withOpacity(.5))
-                    ]),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "From",
-                          fillColor: ColorConstants.mainWhite,
-                          filled: true,
-                          prefixIcon: Icon(
-                            Icons.location_on_outlined,
-                            color: Colors.blue,
-                          ),
-                          border:
-                              OutlineInputBorder(borderSide: BorderSide.none)),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          hintText: "To",
-                          fillColor: ColorConstants.mainWhite,
-                          filled: true,
-                          prefixIcon: Icon(
-                            Icons.location_on_outlined,
-                            color: Colors.blue,
-                          ),
-                          border:
-                              OutlineInputBorder(borderSide: BorderSide.none)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Container(
-                  padding: EdgeInsets.all(10),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: List.generate(
-                          10,
-                          (index) => Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 15.0, vertical: 6),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: ColorConstants.mainWhite,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            offset: Offset(6, 6),
-                                            blurRadius: 8,
-                                            color: ColorConstants.mainBlack
-                                                .withOpacity(.6))
-                                      ]),
-                                  child: Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 30,
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text("Bus name"),
-                                          SizedBox(height: 3),
-                                          Text("Ac/non Ac"),
-                                          SizedBox(height: 3),
-                                          Text("1 stop away"),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Icon(
-                                        Icons.call_split_rounded,
-                                        color: ColorConstants.mainBlue,
-                                        size: 30,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            //#2 Sujested locations
-
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                  children: List.generate(
-                10,
-                (index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => UserHomeScreen2(name: name,timing: distance,)));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                offset: Offset(4, 6),
-                                blurRadius: 8,
-                                color: ColorConstants.mainBlack.withOpacity(.5))
-                          ]),
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.message, color: Colors.green),
-                              SizedBox(width: 20),
-                              Text(name)
-                            ],
-                          ),
-                          SizedBox(height: 20),
-                          Text(distance)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )),
-            )
+        appBar: AppBar(
+            title: Text(
+          "",
+        )),
+        drawer: ReusableDrawerWidget(
+          name: 'name',
+          email: 'email',
+          drawerItems: [
+            DrawerItem(
+                icon: Icons.bus_alert, title: 'Nearby bus stops', onTap: () {}),
+            DrawerItem(
+                icon: Icons.directions_bus,
+                title: 'Track my bus',
+                onTap: () {}),
+            DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
+            DrawerItem(
+                icon: Icons.privacy_tip_outlined,
+                title: 'Terms & Condition',
+                onTap: () {}),
+            DrawerItem(
+                icon: Icons.power_settings_new, title: 'Logout', onTap: () {}),
           ],
         ),
-      ),
-    ));
+        body: userHomeScreenState.isLoading
+            ? Center(
+                child: ReusableLoadingWidget(),
+              )
+            : SafeArea(
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 30),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                            ImageConstants.mapSampleImageJpg,
+                          ),
+                          fit: BoxFit.cover)),
+                  child: Column(
+                    children: [
+                      //#1 search widget
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: const Offset(4, 6),
+                                    blurRadius: 8,
+                                    color: ColorConstants.mainBlack
+                                        .withOpacity(.5))
+                              ]),
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "From",
+                                    fillColor: ColorConstants.mainWhite,
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.location_on_outlined,
+                                      color: Colors.blue,
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide.none)),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                    hintText: "To",
+                                    fillColor: ColorConstants.mainWhite,
+                                    filled: true,
+                                    prefixIcon: Icon(
+                                      Icons.location_on_outlined,
+                                      color: Colors.blue,
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderSide: BorderSide.none)),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: RefreshIndicator(
+                              onRefresh: () async {
+                                Provider.of<UserHomeScreenController>(context,
+                                        listen: false)
+                                    .getRoutesList();
+                              },
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: List.generate(
+                                      10, (index) => HomeScreenBussesCard()),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      //#2 Sujested locations
+
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                            children: List.generate(
+                          userHomeScreenState
+                                  .routesListResModel?.routesList?.length ??
+                              0,
+                          (index) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            RouteDetailsScreen(
+                                              name: name,
+                                              timing: distance,
+                                            )));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          offset: Offset(4, 6),
+                                          blurRadius: 8,
+                                          color: ColorConstants.mainBlack
+                                              .withOpacity(.5))
+                                    ]),
+                                padding: EdgeInsets.all(10),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.message,
+                                            color: Colors.green),
+                                        SizedBox(width: 20),
+                                        Text(userHomeScreenState
+                                                .routesListResModel
+                                                ?.routesList?[index]
+                                                .name ??
+                                            "")
+                                      ],
+                                    ),
+                                    SizedBox(height: 20),
+                                    Text(userHomeScreenState.routesListResModel
+                                                ?.routesList?[index].isActive ==
+                                            true
+                                        ? "Active"
+                                        : "Inactive")
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )),
+                      )
+                    ],
+                  ),
+                ),
+              ));
   }
 }
