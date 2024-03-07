@@ -17,15 +17,12 @@ class BusOwnerLoginScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 12.0, right: 12, top: 50),
           child: Column(
             children: [
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(ImageConstants.loginRegistrationPng)),
+              Align(alignment: Alignment.topLeft, child: Image.asset(ImageConstants.loginRegistrationPng)),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Bus Owner Login",
-                    style: GoogleFonts.roboto(
-                        fontSize: 26, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.roboto(fontSize: 26, fontWeight: FontWeight.w500),
                   )),
               SizedBox(
                 height: 30,
@@ -58,13 +55,12 @@ class BusOwnerLoginScreen extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.black),
+                            backgroundColor: MaterialStatePropertyAll(Colors.black),
                             shape: MaterialStatePropertyAll(StadiumBorder())),
-                        onPressed: () {},
-                        child: const Text("Login",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 25)),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => OwnerHomeScreen()));
+                        },
+                        child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 25)),
                       )),
                   const SizedBox(
                     height: 30,
@@ -72,23 +68,14 @@ class BusOwnerLoginScreen extends StatelessWidget {
 
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BusOwnerRegistrationScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BusOwnerRegistrationScreen()));
                     },
                     child: RichText(
                         text: TextSpan(children: [
-                      TextSpan(
-                          text: "Don't have an account ",
-                          style: TextStyle(fontSize: 15, color: Colors.black)),
+                      TextSpan(text: "Don't have an account ", style: TextStyle(fontSize: 15, color: Colors.black)),
                       TextSpan(
                           text: "Register",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold))
+                          style: TextStyle(fontSize: 15, color: Colors.blue, fontWeight: FontWeight.bold))
                     ])),
                   ),
                 ]),

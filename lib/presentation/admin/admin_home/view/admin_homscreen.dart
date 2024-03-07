@@ -3,18 +3,14 @@ import 'package:bus_tracking_application/presentation/admin/admin_bus_route/view
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main(List<String> args) {
-  runApp(MaterialApp(
-    home: admin_Homescreen(),
-  ));
-}
+class AdminHomeScreen extends StatefulWidget {
+  const AdminHomeScreen({super.key});
 
-class admin_Homescreen extends StatefulWidget {
   @override
-  State<admin_Homescreen> createState() => _admin_HomescreenState();
+  State<AdminHomeScreen> createState() => _AdminHomeScreenState();
 }
 
-class _admin_HomescreenState extends State<admin_Homescreen> {
+class _AdminHomeScreenState extends State<AdminHomeScreen> {
   int index = 0;
   List bottomscreens = [AdminBusRoute(), AdminRequest(), AdminRequest()];
 

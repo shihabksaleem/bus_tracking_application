@@ -3,12 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-void main(List<String> args) {
-  runApp(MaterialApp(
-    home: AdminBusStop(),
-  ));
-}
-
 class AdminBusStop extends StatelessWidget {
   final busstopcontroller = TextEditingController();
 

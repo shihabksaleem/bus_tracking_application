@@ -4,12 +4,14 @@ import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/controller/user_home_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/widget/home_screen_busses_card.dart';
+import 'package:bus_tracking_application/presentation/common_screen/get_started_screen/view/get_started_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_drawer_widget.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../route_details_screen/view/route_details_screen.dart';
 
@@ -28,8 +30,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<UserHomeScreenController>(context, listen: false)
-          .getRoutesList();
+      Provider.of<UserHomeScreenController>(context, listen: false).getRoutesList();
     });
     super.initState();
   }
@@ -46,19 +47,23 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
           name: 'name',
           email: 'email',
           drawerItems: [
-            DrawerItem(
-                icon: Icons.bus_alert, title: 'Nearby bus stops', onTap: () {}),
-            DrawerItem(
-                icon: Icons.directions_bus,
-                title: 'Track my bus',
-                onTap: () {}),
+            DrawerItem(icon: Icons.bus_alert, title: 'Nearby bus stops', onTap: () {}),
+            DrawerItem(icon: Icons.directions_bus, title: 'Track my bus', onTap: () {}),
             DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
+            DrawerItem(icon: Icons.privacy_tip_outlined, title: 'Terms & Condition', onTap: () {}),
             DrawerItem(
-                icon: Icons.privacy_tip_outlined,
-                title: 'Terms & Condition',
-                onTap: () {}),
-            DrawerItem(
-                icon: Icons.power_settings_new, title: 'Logout', onTap: () {}),
+                icon: Icons.power_settings_new,
+                title: 'Logout',
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.clear();
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GetStartedScreen(),
+                      ),
+                      (route) => false);
+                }),
           ],
         ),
         body: userHomeScreenState.isLoading
@@ -87,8 +92,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                 BoxShadow(
                                     offset: const Offset(4, 6),
                                     blurRadius: 8,
-                                    color: ColorConstants.mainBlack
-                                        .withOpacity(.5))
+                                    color: ColorConstants.mainBlack.withOpacity(.5))
                               ]),
                           child: Column(
                             children: [
@@ -101,8 +105,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                       Icons.location_on_outlined,
                                       color: Colors.blue,
                                     ),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none)),
+                                    border: OutlineInputBorder(borderSide: BorderSide.none)),
                               ),
                               SizedBox(
                                 height: 16,
@@ -116,8 +119,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                       Icons.location_on_outlined,
                                       color: Colors.blue,
                                     ),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none)),
+                                    border: OutlineInputBorder(borderSide: BorderSide.none)),
                               ),
                             ],
                           ),
@@ -131,14 +133,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                             padding: EdgeInsets.all(10),
                             child: RefreshIndicator(
                               onRefresh: () async {
-                                Provider.of<UserHomeScreenController>(context,
-                                        listen: false)
-                                    .getRoutesList();
+                                Provider.of<UserHomeScreenController>(context, listen: false).getRoutesList();
                               },
                               child: SingleChildScrollView(
                                 child: Column(
-                                  children: List.generate(
-                                      10, (index) => HomeScreenBussesCard()),
+                                  children: List.generate(10, (index) => HomeScreenBussesCard()),
                                 ),
                               ),
                             ),
@@ -152,20 +151,16 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                             children: List.generate(
-                          userHomeScreenState
-                                  .routesListResModel?.routesList?.length ??
-                              0,
+                          userHomeScreenState.routesListResModel?.routesList?.length ?? 0,
                           (index) => Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            RouteDetailsScreen(
-                                              name: name,
-                                              timing: distance,
-                                            )));
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                    builder: (context) => RouteDetailsScreen(
+                                          name: name,
+                                          timing: distance,
+                                        )));
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -175,8 +170,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                       BoxShadow(
                                           offset: Offset(4, 6),
                                           blurRadius: 8,
-                                          color: ColorConstants.mainBlack
-                                              .withOpacity(.5))
+                                          color: ColorConstants.mainBlack.withOpacity(.5))
                                     ]),
                                 padding: EdgeInsets.all(10),
                                 child: Column(
@@ -184,20 +178,13 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Icon(Icons.message,
-                                            color: Colors.green),
+                                        Icon(Icons.message, color: Colors.green),
                                         SizedBox(width: 20),
-                                        Text(userHomeScreenState
-                                                .routesListResModel
-                                                ?.routesList?[index]
-                                                .name ??
-                                            "")
+                                        Text(userHomeScreenState.routesListResModel?.routesList?[index].name ?? "")
                                       ],
                                     ),
                                     SizedBox(height: 20),
-                                    Text(userHomeScreenState.routesListResModel
-                                                ?.routesList?[index].isActive ==
-                                            true
+                                    Text(userHomeScreenState.routesListResModel?.routesList?[index].isActive == true
                                         ? "Active"
                                         : "Inactive")
                                   ],
