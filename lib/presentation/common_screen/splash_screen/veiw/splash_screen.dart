@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bus_tracking_application/core/app_utils/app_utils.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/admin/admin_login/view/admin_login_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/user_home_screen.dart';
 import 'package:bus_tracking_application/presentation/common_screen/get_started_screen/view/get_started_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
@@ -21,11 +23,33 @@ class _SplashScreenState extends State<SplashScreen> {
       final token = await AppUtils.getAccessKey();
 
       if (token != null && token.isNotEmpty) {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => UserHomeScreen(),
-            ));
+        final userType = await AppUtils.getUserType();
+
+        if (userType == "passenger") {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UserHomeScreen(),
+              ));
+        } else if (userType == "admin") {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AdminLoginScreen(),
+              ));
+        } else if (userType == "owner") {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OwnerHomeScreen(),
+              ));
+        } else {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GetStartedScreen(),
+              ));
+        }
       } else {
         Navigator.pushReplacement(
             context,

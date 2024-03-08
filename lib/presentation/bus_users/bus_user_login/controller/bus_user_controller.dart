@@ -33,6 +33,7 @@ class LoginScreenController extends ChangeNotifier {
         if (loginData != null) {
           Map<String, dynamic> sharedData = {
             'access': loginData!.token,
+            "userType": "passenger"
           };
 
           ///setting shared pref
