@@ -1,4 +1,5 @@
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/admin/admin_home/view/admin_homscreen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,15 +21,12 @@ class AdminLoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: Image.asset(ImageConstants.loginRegistrationPng)),
+                Align(alignment: Alignment.topLeft, child: Image.asset(ImageConstants.loginRegistrationPng)),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Welcome Admin ",
-                    style: GoogleFonts.roboto(
-                        fontSize: 26, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.roboto(fontSize: 26, fontWeight: FontWeight.w500),
                   ),
                 ),
                 const SizedBox(
@@ -39,16 +37,14 @@ class AdminLoginScreen extends StatelessWidget {
                     children: [
                       //first widget
                       ReusableTextFieldWidget(
-                          prefixIcon:
-                              const Icon(Icons.email, color: Colors.blue),
+                          prefixIcon: const Icon(Icons.email, color: Colors.blue),
                           name: "Email Address",
                           controller: userNameController,
                           keyboardType: TextInputType.emailAddress),
                       //second widget for password
 
                       ReusableTextFieldWidget(
-                        prefixIcon:
-                            const Icon(Icons.password, color: Colors.blue),
+                        prefixIcon: const Icon(Icons.password, color: Colors.blue),
                         name: "Password",
                         controller: passwordController,
                         keyboardType: TextInputType.number,
@@ -66,12 +62,17 @@ class AdminLoginScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.black),
+                          backgroundColor: MaterialStatePropertyAll(Colors.black),
                           shape: MaterialStatePropertyAll(StadiumBorder())),
-                      onPressed: () {},
-                      child: const Text("Login",
-                          style: TextStyle(color: Colors.white, fontSize: 25)),
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AdminHomeScreen(),
+                            ),
+                            (route) => false);
+                      },
+                      child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 25)),
                     )),
                 const SizedBox(
                   height: 30,
@@ -79,8 +80,8 @@ class AdminLoginScreen extends StatelessWidget {
                 Center(
                   child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => AdminRegistration()));
+                        Navigator.of(context)
+                            .pushReplacement(MaterialPageRoute(builder: (context) => AdminRegistration()));
                       },
                       child: RichText(
                           text: TextSpan(children: [
@@ -90,10 +91,7 @@ class AdminLoginScreen extends StatelessWidget {
                         ),
                         TextSpan(
                           text: " Register",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 15, color: Colors.blue, fontWeight: FontWeight.bold),
                         )
                       ]))
 

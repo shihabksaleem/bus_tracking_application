@@ -2,7 +2,7 @@
 
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/admin/admin_login/view/admin_login_screen.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login/view/bus_owner_login.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/view/bus_owner_login_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_users/bus_user_login/view/bus_user_login.dart';
 import 'package:flutter/material.dart';
 

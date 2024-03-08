@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:bus_tracking_application/core/app_utils/app_utils.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/bus_users/user_home_screen/view/user_home_screen.dart';
 import 'package:bus_tracking_application/presentation/common_screen/get_started_screen/view/get_started_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +17,22 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => GetStartedScreen(),
-          ));
+    Timer(const Duration(seconds: 2), () async {
+      final token = await AppUtils.getAccessKey();
+
+      if (token != null && token.isNotEmpty) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UserHomeScreen(),
+            ));
+      } else {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => GetStartedScreen(),
+            ));
+      }
     });
     super.initState();
   }
