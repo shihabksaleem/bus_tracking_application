@@ -111,41 +111,13 @@ class AppUtils {
     }
   }
 
-  //use this for getting user id
-  static Future<String?> getUserId() async {
+  ///used this for luminar
+  static Future<String?> getUserType() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
-      final userId = jsonDecode(
-              sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['userId']
-          .toString();
-      return userId;
-    } else {
-      return null;
-    }
-  }
-
-//use this for getting student id
-  static Future<String?> getStudentId() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
-      final studentId =
-          jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)[
-                  'studentId']
-              .toString();
-      return studentId;
-    } else {
-      return null;
-    }
-  }
-
-  ///used this for getting student movbile number verification status
-  static Future<String?> getPhoneVerificaitonStatus() async {
-    final sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
-      final isVerified =
-          jsonDecode(sharedPreferences.get(AppConfig.LOGIN_DATA) as String)[
-              'Phone_verified'];
-      return isVerified;
+      final usertype = jsonDecode(
+          sharedPreferences.get(AppConfig.LOGIN_DATA) as String)['userType'];
+      return usertype;
     } else {
       return null;
     }
