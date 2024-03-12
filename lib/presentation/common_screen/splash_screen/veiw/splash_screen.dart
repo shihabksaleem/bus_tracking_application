@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bus_tracking_application/core/app_utils/app_utils.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/admin/admin_login/view/admin_login_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_bottom_nav_bar_screen/view/o_bottom_nav_bar_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_home_screen/view/passenger_home_screen.dart';
 import 'package:bus_tracking_application/presentation/common_screen/get_started_screen/view/get_started_screen.dart';
@@ -41,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => OwnerHomeScreen(),
+                builder: (context) => OBottomNavBarScreen(),
               ));
         } else {
           Navigator.pushReplacement(

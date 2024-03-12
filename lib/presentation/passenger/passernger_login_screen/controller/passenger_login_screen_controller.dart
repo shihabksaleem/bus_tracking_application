@@ -15,14 +15,16 @@ class PassengerLoginScreenController extends ChangeNotifier {
 
   // to Fetch the Course demo videos
 
-  Future<bool> onLogin({required String userName, required String password}) async {
+  Future<bool> onPasssengerLogin(
+      {required String userName, required String password}) async {
     sharedPreferences = await SharedPreferences.getInstance();
     isLoading = true;
     notifyListeners();
 
     try {
       // need to update values from  user input
-      final fetchedData = await PassengerLoginScreenService().onLogin(body: {
+      final fetchedData =
+          await PassengerLoginScreenService().onPassenrLogin(body: {
         "username": userName,
         "password": password,
       });
@@ -30,11 +32,15 @@ class PassengerLoginScreenController extends ChangeNotifier {
         loginData = fetchedData.data;
 
         if (loginData != null) {
-          Map<String, dynamic> sharedData = {'access': loginData!.token, "userType": "passenger"};
+          Map<String, dynamic> sharedData = {
+            'access': loginData!.token,
+            "userType": "passenger"
+          };
 
           ///setting shared pref
           ///this is where first time the data is stored to sharedpref as map converted json.
-          await sharedPreferences.setString(AppConfig.LOGIN_DATA, jsonEncode(sharedData));
+          await sharedPreferences.setString(
+              AppConfig.LOGIN_DATA, jsonEncode(sharedData));
         }
 
         isLoading = false;

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_bottom_nav_bar_screen/view/o_bottom_nav_bar_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +123,7 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => OwnerHomeScreen(),
+                        builder: (context) => OBottomNavBarScreen(),
                       ),
                       (route) => false);
                 },

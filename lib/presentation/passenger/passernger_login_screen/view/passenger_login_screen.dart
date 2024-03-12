@@ -36,12 +36,15 @@ class _PassengerLoginScreenState extends State<PassengerLoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Align(alignment: Alignment.topLeft, child: Image.asset(ImageConstants.loginRegistrationPng)),
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset(ImageConstants.loginRegistrationPng)),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Welcome to \nBustapp ",
-                    style: GoogleFonts.roboto(fontSize: 26, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.roboto(
+                        fontSize: 26, fontWeight: FontWeight.w500),
                   ),
                 ),
                 const SizedBox(
@@ -53,7 +56,8 @@ class _PassengerLoginScreenState extends State<PassengerLoginScreen> {
                       //first widget
                       ReusableTextFieldWidget(
                         formKey: userNameFormKey,
-                        prefixIcon: const Icon(Icons.email, color: ColorConstants.iconBlue),
+                        prefixIcon: const Icon(Icons.email,
+                            color: ColorConstants.iconBlue),
                         name: "User Name",
                         controller: userNameController,
                         validator: (p0) {
@@ -68,7 +72,8 @@ class _PassengerLoginScreenState extends State<PassengerLoginScreen> {
 
                       ReusableTextFieldWidget(
                         formKey: passwordFormKey,
-                        prefixIcon: const Icon(Icons.password, color: ColorConstants.iconBlue),
+                        prefixIcon: const Icon(Icons.password,
+                            color: ColorConstants.iconBlue),
                         name: "Password",
                         controller: passwordController,
                         keyboardType: TextInputType.number,
@@ -97,12 +102,16 @@ class _PassengerLoginScreenState extends State<PassengerLoginScreen> {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: const ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(Colors.black),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.black),
                               shape: MaterialStatePropertyAll(StadiumBorder())),
                           onPressed: () {
-                            if (userNameFormKey.currentState!.validate() && passwordFormKey.currentState!.validate()) {
-                              Provider.of<PassengerLoginScreenController>(context, listen: false)
-                                  .onLogin(
+                            if (userNameFormKey.currentState!.validate() &&
+                                passwordFormKey.currentState!.validate()) {
+                              Provider.of<PassengerLoginScreenController>(
+                                      context,
+                                      listen: false)
+                                  .onPasssengerLogin(
                                 userName: userNameController.text,
                                 password: passwordController.text,
                               )
@@ -111,14 +120,17 @@ class _PassengerLoginScreenState extends State<PassengerLoginScreen> {
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PassengerHomeScreen(),
+                                        builder: (context) =>
+                                            PassengerHomeScreen(),
                                       ),
                                       (route) => false);
                                 }
                               });
                             }
                           },
-                          child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 25)),
+                          child: const Text("Login",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25)),
                         )),
                 const SizedBox(
                   height: 30,
@@ -126,8 +138,8 @@ class _PassengerLoginScreenState extends State<PassengerLoginScreen> {
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacement(MaterialPageRoute(builder: (context) => PassengerRegistrationScreen()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => PassengerRegistrationScreen()));
                     },
                     child: Text(
                       "Don't have an account?Register Here!!",

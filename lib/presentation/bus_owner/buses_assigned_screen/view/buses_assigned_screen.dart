@@ -1,15 +1,13 @@
-import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: BusesAssignedScreen(),
-  ));
-}
-
-class BusesAssignedScreen extends StatelessWidget {
+class BusesAssignedScreen extends StatefulWidget {
   const BusesAssignedScreen({super.key});
 
+  @override
+  State<BusesAssignedScreen> createState() => _BusesAssignedScreenState();
+}
+
+class _BusesAssignedScreenState extends State<BusesAssignedScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +20,7 @@ class BusesAssignedScreen extends StatelessWidget {
               itemCount: 10,
               itemBuilder: (context, index) {
                 return const Card(
-                  color:Color(0xff628e91),
+                  color: Color(0xff628e91),
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Column(
