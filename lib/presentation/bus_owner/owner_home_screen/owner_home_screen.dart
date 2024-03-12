@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/owner_bus_details.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_screen/owner_bus_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/owner_driver_screen/owner_driver_screen.dart';
 import 'package:flutter/material.dart';
 
 class OwnerHomeScreen extends StatefulWidget {
@@ -12,87 +13,50 @@ class OwnerHomeScreen extends StatefulWidget {
 }
 
 class _OwnerHomeScreenState extends State<OwnerHomeScreen> {
+  var indexNum = 0;
+  List tabWidgetsList = [
+    OwnerBusScreen(),
+    OwnerDriverScreen(),
+    // OwnerBusRoute(),
+    // OwnerbusAssigned(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Owner Home Screen",
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
-        child: ListView.separated(
-          itemCount: 2,
-          separatorBuilder: (context, index) => SizedBox(height: 10),
-          itemBuilder: (context, index) {
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 204, 237, 237),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Bus Name",
-                        style: TextStyle(
-                            color: ColorConstants.mainBlack,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        "Bus Route",
-                        style: TextStyle(
-                          color: ColorConstants.mainBlack,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.edit_outlined,
-                            color: Colors.green,
-                            size: 35,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.delete_outline_rounded,
-                              size: 35, color: Colors.red)),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => OwnerBusDetails(),
-            ),
-          );
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_bus_outlined),
+            label: "Buses",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_2_outlined),
+            label: "Driver",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.route_outlined),
+            label: "Route",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_box_outlined),
+            label: "Assigned",
+          ),
+        ],
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: ColorConstants.mainBlue.withOpacity(0.2),
+        elevation: 0,
+        iconSize: 30,
+        selectedItemColor: ColorConstants.mainBlue,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.w700),
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w500),
+        currentIndex: indexNum,
+        onTap: (int index) {
+          setState(() {
+            indexNum = index;
+          });
         },
-        backgroundColor: ColorConstants.mainBlue,
-        foregroundColor: ColorConstants.mainWhite,
-        shape: CircleBorder(),
-        child: Icon(Icons.add),
       ),
+      body: tabWidgetsList.elementAt(indexNum),
     );
   }
 }
