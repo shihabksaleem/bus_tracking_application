@@ -150,7 +150,7 @@ class _RouteSelectionScreenState extends State<RouteSelectionScreen> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
+        appBar: AppBar(centerTitle: true,
           title: const Text("Bus Route",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         ),
