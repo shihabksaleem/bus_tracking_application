@@ -27,23 +27,19 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final registrationProvider =
-        Provider.of<BusOwnerRegistrationScreenController>(context);
+    final registrationProvider = Provider.of<BusOwnerRegistrationScreenController>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 12.0, right: 12, top: 50),
           child: Column(
             children: [
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(ImageConstants.loginRegistrationPng)),
+              Align(alignment: Alignment.topLeft, child: Image.asset(ImageConstants.loginRegistrationPng)),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Bus Owner Registration",
-                    style: GoogleFonts.roboto(
-                        fontSize: 26, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.roboto(fontSize: 26, fontWeight: FontWeight.w500),
                   )),
               const SizedBox(
                 height: 30,
@@ -108,7 +104,7 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'please enter your phone number';
-                      } else if (value.length<10) {
+                      } else if (value.length < 10) {
                         return 'please enter 10 digit phone number';
                       }
                       return null;
@@ -142,19 +138,15 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             style: const ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.black),
-                                shape:
-                                    MaterialStatePropertyAll(StadiumBorder())),
+                                backgroundColor: MaterialStatePropertyAll(Colors.black),
+                                shape: MaterialStatePropertyAll(StadiumBorder())),
                             onPressed: () {
                               if (nameFormKey.currentState!.validate() &&
                                   userNameFormKey.currentState!.validate() &&
                                   passwordFormKey.currentState!.validate() &&
                                   phoneNumberFormKey.currentState!.validate() &&
                                   addressFormKey.currentState!.validate()) {
-                                Provider.of<BusOwnerRegistrationScreenController>(
-                                        context,
-                                        listen: false)
+                                Provider.of<BusOwnerRegistrationScreenController>(context, listen: false)
                                     .onRegister(
                                         name: nameController.text,
                                         userName: userNameController.text,
@@ -166,17 +158,14 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              OwnerHomeScreen(),
+                                          builder: (context) => BusOwnerLoginScreen(),
                                         ),
                                         (route) => false);
                                   }
                                 });
                               }
                             },
-                            child: const Text("Register",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25)),
+                            child: const Text("Register", style: TextStyle(color: Colors.white, fontSize: 25)),
                           )),
                   const SizedBox(
                     height: 30,
@@ -184,22 +173,14 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
 
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BusOwnerLoginScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BusOwnerLoginScreen()));
                     },
                     child: RichText(
                         text: const TextSpan(children: [
-                      TextSpan(
-                          text: "Already have an account ",
-                          style: TextStyle(fontSize: 15, color: Colors.black)),
+                      TextSpan(text: "Already have an account ", style: TextStyle(fontSize: 15, color: Colors.black)),
                       TextSpan(
                           text: "Login",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold))
+                          style: TextStyle(fontSize: 15, color: Colors.blue, fontWeight: FontWeight.bold))
                     ])),
                   ),
                 ]),
