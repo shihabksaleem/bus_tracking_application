@@ -8,6 +8,11 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
   final ownerController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
+
+  final userNameFormKey = GlobalKey<FormState>();
+  final emailFormKey=GlobalKey<FormState>();
+  final passwordFormKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +31,7 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                     style: GoogleFonts.roboto(
                         fontSize: 26, fontWeight: FontWeight.w500),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Center(
@@ -34,7 +39,7 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                   ///First widget for owner name
                   ReusableTextFieldWidget(
                     name: "Owner Name",
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: const Icon(Icons.person),
                     controller: ownerController,
                     keyboardType: TextInputType.text,
                   ),
@@ -42,7 +47,7 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                   ///Second Widget for owners email address
                   ReusableTextFieldWidget(
                     name: "Email Address",
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: const Icon(Icons.email),
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                   ),
@@ -50,13 +55,13 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                   ///Third Widget for Owner password
                   ReusableTextFieldWidget(
                     name: "Password",
-                    prefixIcon: Icon(Icons.password),
+                    prefixIcon: const Icon(Icons.password),
                     controller: passController,
                     keyboardType: TextInputType.number,
                     obscureText: true,
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
 
@@ -85,7 +90,7 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                               builder: (context) => BusOwnerLoginScreen()));
                     },
                     child: RichText(
-                        text: TextSpan(children: [
+                        text: const TextSpan(children: [
                       TextSpan(
                           text: "Already have an account ",
                           style: TextStyle(fontSize: 15, color: Colors.black)),
