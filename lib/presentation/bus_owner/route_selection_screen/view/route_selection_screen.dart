@@ -1,3 +1,4 @@
+import 'package:bus_tracking_application/presentation/bus_owner/buses_assigned_screen/view/buses_assigned_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -159,43 +160,53 @@ class _RouteSelectionScreenState extends State<RouteSelectionScreen> {
             itemCount: 5,
             itemBuilder: (context, index) => Container(
               height: 100,
-              child: Card(
-                  color: const Color(0xff628e91),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Source",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Wrap(
-                          children: List.generate(5, (index) {
-                            return Container(
-                              margin: const EdgeInsets.all(4),
-                              width: 4,
-                              height: 4,
-                              color: ColorConstants.mainWhite,
-                              child: const DecoratedBox(
-                                  decoration:
-                                      BoxDecoration(color: Colors.white)),
-                            );
-                          }),
-                        ),
-                        const Text(
-                          "Destination",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                            onPressed: assignBuses,
-                            icon: const Icon(
-                              Icons.arrow_forward,
-                              color: ColorConstants.mainWhite,
-                            ))
-                      ],
-                    ),
-                  )),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BusesAssignedScreen(),
+                      ));
+                },
+                child: Card(
+                    color: const Color(0xff628e91),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Source",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Wrap(
+                            children: List.generate(5, (index) {
+                              return Container(
+                                margin: const EdgeInsets.all(4),
+                                width: 4,
+                                height: 4,
+                                color: ColorConstants.mainWhite,
+                                child: const DecoratedBox(
+                                    decoration:
+                                        BoxDecoration(color: Colors.white)),
+                              );
+                            }),
+                          ),
+                          const Text(
+                            "Destination",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          IconButton(
+                              onPressed: assignBuses,
+                              icon: const Icon(
+                                Icons.add_circle_sharp,
+                                size: 30,
+                                color: ColorConstants.mainWhite,
+                              ))
+                        ],
+                      ),
+                    )),
+              ),
             ),
           ),
         ),

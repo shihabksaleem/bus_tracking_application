@@ -1,6 +1,7 @@
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/controller/bus_owner_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/view/bus_owner_registration_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_bottom_nav_bar_screen/view/o_bottom_nav_bar_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
@@ -23,15 +24,12 @@ class BusOwnerLoginScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 12.0, right: 12, top: 50),
           child: Column(
             children: [
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Image.asset(ImageConstants.loginRegistrationPng)),
+              Align(alignment: Alignment.topLeft, child: Image.asset(ImageConstants.loginRegistrationPng)),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Bus Owner Login",
-                    style: GoogleFonts.roboto(
-                        fontSize: 26, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.roboto(fontSize: 26, fontWeight: FontWeight.w500),
                   )),
               const SizedBox(
                 height: 30,
@@ -74,67 +72,33 @@ class BusOwnerLoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  loginPageState.isLoading
-                      ? const Center(
-                          child: ReusableLoadingWidget(),
-                        )
-                      : SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style: const ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll(Colors.black),
-                                shape:
-                                    MaterialStatePropertyAll(StadiumBorder())),
-                            onPressed: () {
-                              if (userFormKey.currentState!.validate() &&
-                                  passwordFormKey.currentState!.validate()) {
-                                Provider.of<BusOwnerLoginScreenController>(
-                                        context,
-                                        listen: false)
-                                    .onLogin(
-                                        userName: emailController.text,
-                                        password: passController.text)
-                                    .then((value) {
-                                  if (value) {
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const OwnerHomeScreen()),
-                                        (route) => false);
-                                  }
-                                });
-                              }
-                            },
-                            child: const Text("Login",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 25)),
-                          )),
+
+                  SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(Colors.black),
+                            shape: MaterialStatePropertyAll(StadiumBorder())),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => OBottomNavBarScreen()));
+                        },
+                        child: const Text("Login", style: TextStyle(color: Colors.white, fontSize: 25)),
+                      )),
                   const SizedBox(
                     height: 30,
                   ),
 
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BusOwnerRegistrationScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => BusOwnerRegistrationScreen()));
                     },
                     child: RichText(
-                        text: const TextSpan(children: [
-                      TextSpan(
-                          text: "Don't have an account ",
-                          style: TextStyle(fontSize: 15, color: Colors.black)),
+                        text: TextSpan(children: [
+                      TextSpan(text: "Don't have an account ", style: TextStyle(fontSize: 15, color: Colors.black)),
                       TextSpan(
                           text: "Register",
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.blue,
-                              fontWeight: FontWeight.bold))
+                          style: TextStyle(fontSize: 15, color: Colors.blue, fontWeight: FontWeight.bold))
                     ])),
                   ),
                 ]),

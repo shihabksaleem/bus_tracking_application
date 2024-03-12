@@ -99,7 +99,7 @@ class AppUtils {
     }
   }
 
-  ///used this for luminar
+  ///used this for bus tracking
   static Future<String?> getAccessKey() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {
@@ -111,7 +111,7 @@ class AppUtils {
     }
   }
 
-  ///used this for luminar
+  ///used this for bus tracking
   static Future<String?> getUserType() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.get(AppConfig.LOGIN_DATA) != null) {

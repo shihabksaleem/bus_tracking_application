@@ -18,28 +18,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-        ChangeNotifierProvider(
-        create: (context)
-    =>
-        PassengerLoginScreenController()
-    ),
-    ChangeNotifierProvider(
-    create: (context) => PassengerHomeScreenController()),
-    ChangeNotifierProvider(
-    create: (context) => RouteDetailsScreenController()),
-    ChangeNotifierProvider(
-    create: (context) => BusOwnerLoginScreenController()),
-    ChangeNotifierProvider(
-    create: (context) => BusOwnerRegistrationScreenController(),),
-    ],
-    child: MaterialApp(
-    navigatorKey: AppConfigController.navigatorState,
-    debugShowCheckedModeBanner: false,
-    title: 'Luminar Technolab',
-    home: SplashScreen(),
-    )
-    ,
+      providers: [
+        ChangeNotifierProvider(create: (context) => PassengerLoginScreenController()),
+        ChangeNotifierProvider(create: (context) => PassengerHomeScreenController()),
+        ChangeNotifierProvider(create: (context) => RouteDetailsScreenController()),
+        ChangeNotifierProvider(create: (context) => BusOwnerLoginScreenController()),
+        ChangeNotifierProvider(create: (context) => BusOwnerRegistrationScreenController()),
+        ChangeNotifierProvider(create: (context) => PassengerRegistrationScreenController()),
+      ],
+      child: MaterialApp(
+        navigatorKey: AppConfigController.navigatorState,
+        debugShowCheckedModeBanner: false,
+        title: 'Luminar Technolab',
+        home: SplashScreen(),
+      ),
     );
   }
 }
