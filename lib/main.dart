@@ -1,6 +1,7 @@
 import 'package:bus_tracking_application/app_config/app_config_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/controller/bus_owner_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/controller/bus_owner_registration_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/passenger/passenger_registration_screen/controller/passenget_registration_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passernger_login_screen/controller/passenger_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_home_screen/controller/passenger_home_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/common_screen/splash_screen/veiw/splash_screen.dart';
