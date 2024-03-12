@@ -1,20 +1,34 @@
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/view/bus_owner_login_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/controller/bus_owner_registration_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../owner_home_screen/owner_home_screen.dart';
 
 class BusOwnerRegistrationScreen extends StatelessWidget {
-  final ownerController = TextEditingController();
-  final emailController = TextEditingController();
+  final userNameController = TextEditingController();
+  final nameController = TextEditingController();
   final passController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final addressController = TextEditingController();
 
+  //form key
   final userNameFormKey = GlobalKey<FormState>();
-  final emailFormKey=GlobalKey<FormState>();
+  final nameFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
+  final phoneNumberFormKey = GlobalKey<FormState>();
+  final addressFormKey = GlobalKey<FormState>();
+
+  BusOwnerRegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final registrationProvider =
+        Provider.of<BusOwnerRegistrationScreenController>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -38,18 +52,32 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                 child: Column(children: [
                   ///First widget for owner name
                   ReusableTextFieldWidget(
-                    name: "Owner Name",
+                    name: "Name",
                     prefixIcon: const Icon(Icons.person),
-                    controller: ownerController,
+                    controller: nameController,
                     keyboardType: TextInputType.text,
+                    formKey: nameFormKey,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Enter Your Name';
+                      }
+                      return null;
+                    },
                   ),
 
                   ///Second Widget for owners email address
                   ReusableTextFieldWidget(
-                    name: "Email Address",
+                    name: "User Name",
                     prefixIcon: const Icon(Icons.email),
-                    controller: emailController,
+                    controller: userNameController,
                     keyboardType: TextInputType.emailAddress,
+                    formKey: userNameFormKey,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'please enter your user name';
+                      }
+                      return null;
+                    },
                   ),
 
                   ///Third Widget for Owner password
@@ -59,25 +87,97 @@ class BusOwnerRegistrationScreen extends StatelessWidget {
                     controller: passController,
                     keyboardType: TextInputType.number,
                     obscureText: true,
+                    formKey: passwordFormKey,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'please enter a password';
+                      } else if (value.length < 6) {
+                        return 'Password must be at least 6 characters long';
+                      }
+                      return null;
+                    },
                   ),
 
+                  ///Fourth widget for phone number
+                  ReusableTextFieldWidget(
+                    name: "PhoneNumber",
+                    prefixIcon: const Icon(Icons.phone),
+                    controller: phoneNumberController,
+                    keyboardType: TextInputType.number,
+                    formKey: phoneNumberFormKey,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'please enter your phone number';
+                      } else if (value.length<10) {
+                        return 'please enter 10 digit phone number';
+                      }
+                      return null;
+                    },
+                  ),
+
+                  ///Fifth widget for address
+                  ReusableTextFieldWidget(
+                    name: "Address",
+                    prefixIcon: const Icon(Icons.home),
+                    controller: addressController,
+                    keyboardType: TextInputType.text,
+                    formKey: addressFormKey,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'please enter your address';
+                      }
+                      return null;
+                    },
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
 
-                  SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: const ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.black),
-                            shape: MaterialStatePropertyAll(StadiumBorder())),
-                        onPressed: () {},
-                        child: const Text("Register",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 25)),
-                      )),
+                  registrationProvider.isLoading
+                      ? const Center(
+                          child: ReusableLoadingWidget(),
+                        )
+                      : SizedBox(
+                          height: 50,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(Colors.black),
+                                shape:
+                                    MaterialStatePropertyAll(StadiumBorder())),
+                            onPressed: () {
+                              if (nameFormKey.currentState!.validate() &&
+                                  userNameFormKey.currentState!.validate() &&
+                                  passwordFormKey.currentState!.validate() &&
+                                  phoneNumberFormKey.currentState!.validate() &&
+                                  addressFormKey.currentState!.validate()) {
+                                Provider.of<BusOwnerRegistrationScreenController>(
+                                        context,
+                                        listen: false)
+                                    .onRegister(
+                                        name: nameController.text,
+                                        userName: userNameController.text,
+                                        password: passController.text,
+                                        phoneNumber: phoneNumberController.text,
+                                        address: addressController.text)
+                                    .then((value) {
+                                  if (value) {
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              OwnerHomeScreen(),
+                                        ),
+                                        (route) => false);
+                                  }
+                                });
+                              }
+                            },
+                            child: const Text("Register",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 25)),
+                          )),
                   const SizedBox(
                     height: 30,
                   ),
