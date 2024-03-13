@@ -2,10 +2,7 @@
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/owner_bus_details.dart';
-import 'package:bus_tracking_application/presentation/global_widgets/reusable_drawer_widget.dart';
 import 'package:flutter/material.dart';
-
-
 
 class OwnerHomeScreen extends StatefulWidget {
   const OwnerHomeScreen({super.key});
@@ -20,11 +17,10 @@ class _OwnerHomeScreenState extends State<OwnerHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Owner Home Screen",
+          "Available busses",
           style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
-
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),

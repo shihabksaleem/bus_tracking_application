@@ -150,8 +150,9 @@ class _RouteSelectionScreenState extends State<RouteSelectionScreen> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(centerTitle: true,
-          title: const Text("Bus Route",
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text("Available Routes",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         ),
         body: Padding(
@@ -169,7 +170,7 @@ class _RouteSelectionScreenState extends State<RouteSelectionScreen> {
                       ));
                 },
                 child: Card(
-                    color:Color(0xFFB2DFDB),
+                    color: Color(0xFFB2DFDB),
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Row(
