@@ -4,9 +4,8 @@ import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/owner_bus_details.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_drawer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../common_screen/get_started_screen/view/get_started_screen.dart';
+
 
 class OwnerHomeScreen extends StatefulWidget {
   const OwnerHomeScreen({super.key});
@@ -19,33 +18,6 @@ class _OwnerHomeScreenState extends State<OwnerHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: ReusableDrawerWidget(
-        name: 'username',
-        email: 'address',
-        drawerItems: [
-          DrawerItem(
-              icon: Icons.bus_alert, title: ' Bus Route', onTap: () {}),
-          DrawerItem(
-              icon: Icons.directions_bus, title: 'Track my bus', onTap: () {}),
-          DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
-          DrawerItem(
-              icon: Icons.privacy_tip_outlined,
-              title: 'Terms & Condition',
-              onTap: () {}),
-          DrawerItem(
-              icon: Icons.power_settings_new,
-              title: 'Logout',
-              onTap: () async{
-                final prefs = await SharedPreferences.getInstance();
-                prefs.clear();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GetStartedScreen(),
-                    ));
-              }),
-        ],
-      ),
       appBar: AppBar(
         title: Text(
           "Owner Home Screen",
