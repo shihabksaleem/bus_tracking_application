@@ -11,7 +11,10 @@ class ApiHelper {
     AppUtils.logger.d("Access : Token $access");
 
     if (access != null) {
-      return {'Content-Type': 'application/json', 'Authorization': 'Token $access'};
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $access'
+      };
     } else if (dbName != null) {
       return {'Content-Type': 'application/json', 'dbName': dbName};
     } else {
@@ -21,7 +24,10 @@ class ApiHelper {
     }
   }
 
-  static getData({required String endPoint, required Map<String, String> header, String? finalUrl}) async {
+  static getData(
+      {required String endPoint,
+      required Map<String, String> header,
+      String? finalUrl}) async {
     if (await AppUtils.isOnline()) {
       try {
         final uri = Uri.parse(finalUrl ?? (AppConfig.baseUrl + endPoint));
@@ -33,9 +39,9 @@ class ApiHelper {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
           if (resBody['status'] == 1 || res.statusCode == 200) {
-            if (resBody['message'] != null) {
+            if (resBody['msg'] != null) {
               AppUtils.oneTimeSnackBar(
-                resBody['message'] ?? "Success",
+                resBody['msg'] ?? "Success",
                 context: AppConfigController.navigatorState.currentContext!,
               );
             }
@@ -43,25 +49,32 @@ class ApiHelper {
             return APIResponse(data: resBody, error: false, errorMessage: '');
           } else {
             AppUtils.oneTimeSnackBar(
-              resBody['message'] ?? 'Something went wrong!',
+              resBody['msg'] ?? 'Something went wrong!',
               context: AppConfigController.navigatorState.currentContext!,
               bgColor: Colors.red,
             );
-            return APIResponse(data: resBody, error: true, errorMessage: resBody['message'] ?? 'Something went wrong!');
+            return APIResponse(
+                data: resBody,
+                error: true,
+                errorMessage: resBody['msg'] ?? 'Something went wrong!');
           }
         } else {
-          return APIResponse(data: '', error: true, errorMessage: 'Something went wrong!');
+          return APIResponse(
+              data: '', error: true, errorMessage: 'Something went wrong!');
         }
       } catch (e) {
-        return APIResponse(data: '', error: true, errorMessage: 'Could\'t reach server');
+        return APIResponse(
+            data: '', error: true, errorMessage: 'Could\'t reach server');
       }
     } else {
       if (AppConfigController.navigatorState.currentContext!.mounted) {
         await AppUtils.oneTimeSnackBar("No internet connection",
-            bgColor: Colors.red, context: AppConfigController.navigatorState.currentContext!);
+            bgColor: Colors.red,
+            context: AppConfigController.navigatorState.currentContext!);
       }
 
-      return APIResponse(data: '', error: true, errorMessage: 'Something went wrong!');
+      return APIResponse(
+          data: '', error: true, errorMessage: 'Something went wrong!');
     }
   }
 
@@ -80,49 +93,61 @@ class ApiHelper {
         final uri = Uri.parse(finalUrl ?? AppConfig.baseUrl + endPoint);
         AppUtils.logger.i(uri);
 
-        final res = await http.post(uri, headers: header, body: jsonEncode(body));
+        final res =
+            await http.post(uri, headers: header, body: jsonEncode(body));
         AppUtils().printData('getData res ${utf8.decode(res.bodyBytes)}');
 
         if (isRequestSucceeded(res.statusCode)) {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
           if (resBody['status'] == 1 || res.statusCode == 200) {
-            if (resBody['message'] != null) {
+            if (resBody['msg'] != null) {
               AppUtils.oneTimeSnackBar(
-                resBody['message'] ?? "Success",
+                resBody['msg'] ?? "Success",
                 context: AppConfigController.navigatorState.currentContext!,
               );
             }
             return APIResponse(data: resBody, error: false, errorMessage: '');
           } else {
             AppUtils.oneTimeSnackBar(
-              resBody['message']?.toString() ?? 'Something went wrong!',
+              resBody['msg']?.toString() ?? 'Something went wrong!',
               context: AppConfigController.navigatorState.currentContext!,
               bgColor: Colors.red,
             );
             return APIResponse(
-                data: resBody, error: true, errorMessage: resBody['message'].toString() ?? 'Something went wrong!');
+                data: resBody,
+                error: true,
+                errorMessage:
+                    resBody['msg'].toString() ?? 'Something went wrong!');
           }
         } else {
           // AppUtils.oneTimeSnackBar('Something went wrong!');
-          return APIResponse(data: res.body, error: true, errorMessage: 'Something went wrong!');
+          return APIResponse(
+              data: res.body,
+              error: true,
+              errorMessage: 'Something went wrong!');
         }
       } catch (e) {
-        return APIResponse(data: '', error: true, errorMessage: 'Could\'t reach server');
+        return APIResponse(
+            data: '', error: true, errorMessage: 'Could\'t reach server');
       }
     } else {
       if (AppConfigController.navigatorState.currentContext!.mounted) {
         await AppUtils.oneTimeSnackBar("No internet connection",
-            bgColor: Colors.red, context: AppConfigController.navigatorState.currentContext!);
+            bgColor: Colors.red,
+            context: AppConfigController.navigatorState.currentContext!);
       }
 
-      return APIResponse(data: '', error: true, errorMessage: 'Something went wrong!');
+      return APIResponse(
+          data: '', error: true, errorMessage: 'Something went wrong!');
     }
   }
 
   //patch
   static Future<APIResponse> patchData(
-      {required String endPoint, required Map<String, String> header, required Map<String, dynamic> body}) async {
+      {required String endPoint,
+      required Map<String, String> header,
+      required Map<String, dynamic> body}) async {
     AppUtils().printData('$body');
     AppUtils().printData('postData');
     AppUtils().printData('header $header');
@@ -135,48 +160,60 @@ class ApiHelper {
 
         // AppUtils.logger.i(uri);
         // print(header);
-        final res = await http.patch(uri, headers: header, body: jsonEncode(body));
+        final res =
+            await http.patch(uri, headers: header, body: jsonEncode(body));
         AppUtils().printData('getData res ${utf8.decode(res.bodyBytes)}');
 
         if (isRequestSucceeded(res.statusCode)) {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
           if (resBody['status'] == 1 || res.statusCode == 200) {
-            if (resBody['message'] != null) {
+            if (resBody['msg'] != null) {
               AppUtils.oneTimeSnackBar(
-                resBody['message'] ?? "Success",
+                resBody['msg'] ?? "Success",
                 context: AppConfigController.navigatorState.currentContext!,
               );
             }
             return APIResponse(data: resBody, error: false, errorMessage: '');
           } else {
             AppUtils.oneTimeSnackBar(
-              resBody['message'] ?? 'Something went wrong!',
+              resBody['msg'] ?? 'Something went wrong!',
               context: AppConfigController.navigatorState.currentContext!,
               bgColor: Colors.red,
             );
             return APIResponse(
-                data: resBody, error: true, errorMessage: resBody['message'].toString() ?? 'Something went wrong!');
+                data: resBody,
+                error: true,
+                errorMessage:
+                    resBody['msg'].toString() ?? 'Something went wrong!');
           }
         } else {
-          return APIResponse(data: res.body, error: true, errorMessage: 'Something went wrong!');
+          return APIResponse(
+              data: res.body,
+              error: true,
+              errorMessage: 'Something went wrong!');
         }
       } catch (e) {
-        return APIResponse(data: '', error: true, errorMessage: 'Could\'t reach server');
+        return APIResponse(
+            data: '', error: true, errorMessage: 'Could\'t reach server');
       }
     } else {
       if (AppConfigController.navigatorState.currentContext!.mounted) {
         await AppUtils.oneTimeSnackBar("No internet connection",
-            bgColor: Colors.red, context: AppConfigController.navigatorState.currentContext!);
+            bgColor: Colors.red,
+            context: AppConfigController.navigatorState.currentContext!);
       }
-      return APIResponse(data: '', error: true, errorMessage: 'Something went wrong!');
+      return APIResponse(
+          data: '', error: true, errorMessage: 'Something went wrong!');
     }
   }
 
 //Delete
 
   static Future<APIResponse> deleteData(
-      {required String endPoint, required Map<String, String> header, required Map<String, dynamic> body}) async {
+      {required String endPoint,
+      required Map<String, String> header,
+      required Map<String, dynamic> body}) async {
     if (await AppUtils.isOnline()) {
       // AppUtils().printData('$body');
       // AppUtils().printData('patch body above');
@@ -186,40 +223,50 @@ class ApiHelper {
 
         // AppUtils.logger.i(uri);
         // print(header);
-        final res = await http.delete(uri, headers: header, body: jsonEncode(body));
+        final res =
+            await http.delete(uri, headers: header, body: jsonEncode(body));
 
         if (isRequestSucceeded(res.statusCode)) {
           var resBody = json.decode(utf8.decode(res.bodyBytes));
 
           if (resBody['status'] == 1 || res.statusCode == 200) {
-            if (resBody['message'] != null) {
+            if (resBody['msg'] != null) {
               AppUtils.oneTimeSnackBar(
-                resBody['message'] ?? "Success",
+                resBody['msg'] ?? "Success",
                 context: AppConfigController.navigatorState.currentContext!,
               );
             }
             return APIResponse(data: resBody, error: false, errorMessage: '');
           } else {
             AppUtils.oneTimeSnackBar(
-              resBody['message'] ?? 'Something went wrong!',
+              resBody['msg'] ?? 'Something went wrong!',
               context: AppConfigController.navigatorState.currentContext!,
               bgColor: Colors.red,
             );
             return APIResponse(
-                data: resBody, error: true, errorMessage: resBody['message'].toString() ?? 'Something went wrong!');
+                data: resBody,
+                error: true,
+                errorMessage:
+                    resBody['msg'].toString() ?? 'Something went wrong!');
           }
         } else {
-          return APIResponse(data: res.body, error: true, errorMessage: 'Something went wrong!');
+          return APIResponse(
+              data: res.body,
+              error: true,
+              errorMessage: 'Something went wrong!');
         }
       } catch (e) {
-        return APIResponse(data: '', error: true, errorMessage: 'Could\'t reach server');
+        return APIResponse(
+            data: '', error: true, errorMessage: 'Could\'t reach server');
       }
     } else {
       if (AppConfigController.navigatorState.currentContext!.mounted) {
         await AppUtils.oneTimeSnackBar("No internet connection",
-            bgColor: Colors.red, context: AppConfigController.navigatorState.currentContext!);
+            bgColor: Colors.red,
+            context: AppConfigController.navigatorState.currentContext!);
       }
-      return APIResponse(data: '', error: true, errorMessage: 'Something went wrong!');
+      return APIResponse(
+          data: '', error: true, errorMessage: 'Something went wrong!');
     }
   }
 
