@@ -7,8 +7,7 @@ import 'package:bus_tracking_application/repository/hleper/api_response.dart';
 class ORouteBottomScreenService {
   Future<APIResponse> getRoutesList() async {
     final APIResponse response = await ApiHelper.getData(
-        endPoint: "/owner/routes/",
-        header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+        endPoint: "/owner/routes/", header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
     if (response.error) {
       return response;
     } else {
@@ -19,14 +18,25 @@ class ORouteBottomScreenService {
 
   Future<APIResponse> getBusList() async {
     final APIResponse response = await ApiHelper.getData(
-        endPoint: "/owner/bus/",
+        endPoint: "/owner/bus/", header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+    if (response.error) {
+      return response;
+    } else {
+      OwnerBusListApiResModel redData = OwnerBusListApiResModel.fromJson(response.data);
+      return APIResponse(data: redData, error: false, errorMessage: '');
+    }
+  }
+
+  Future<APIResponse> assignBus({required Map<String, dynamic> body, required String routeid}) async {
+    final APIResponse response = await ApiHelper.postData(
+        body: body,
+        endPoint: "/owner/routes/$routeid/route_assign/",
         header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
     if (response.error) {
       return response;
     } else {
-      OwnerBusListApiResModel redData =
-          OwnerBusListApiResModel.fromJson(response.data);
-      return APIResponse(data: redData, error: false, errorMessage: '');
+      // OwnerBusListApiResModel redData = OwnerBusListApiResModel.fromJson(response.data);
+      return APIResponse(data: "redData", error: false, errorMessage: '');
     }
   }
 }

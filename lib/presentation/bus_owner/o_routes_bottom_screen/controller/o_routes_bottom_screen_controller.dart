@@ -7,14 +7,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ORoutesBottomScreenControlller with ChangeNotifier {
   bool isLoading = false;
+  bool isPostLoading = false;
   late SharedPreferences sharedPreferences;
   ORoutesListResModel? routesListResModel;
   List<CustomDropDownModel> bussesList = [];
+  String? selectedStartTime;
+  String? selectedEndTime;
 
-  List<CustomDropDownModel> driverList = [];
+  // List<CustomDropDownModel> driverList = [];
 
   CustomDropDownModel? selectedBus;
-  CustomDropDownModel? selectedDriver;
+  // CustomDropDownModel? selectedDriver;
 
   // to Fetch the Course demo videos
   Future<bool> getRoutesList() async {
@@ -58,10 +61,7 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
 
         if (resModel.busList != null && resModel.busList!.isNotEmpty) {
           bussesList = resModel.busList!
-              .map((e) => CustomDropDownModel(
-                  id: e.id.toString(),
-                  value: e.id.toString(),
-                  text: e.name.toString()))
+              .map((e) => CustomDropDownModel(id: e.id.toString(), value: e.id.toString(), text: e.name.toString()))
               .toList();
         }
         print(bussesList.length);
@@ -79,5 +79,59 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
       notifyListeners();
       return false;
     }
+  }
+
+  // to Fetch the Course demo videos
+  Future<bool> assignBus({required String routeid}) async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    isPostLoading = true;
+    notifyListeners();
+
+    try {
+      // need to update values from  user input
+      final fetchedData = await ORouteBottomScreenService().assignBus(routeid: routeid, body: {
+        "start_time": selectedStartTime,
+        "end_time": selectedEndTime,
+        "bus": int.tryParse(selectedBus!.id),
+      });
+      if (fetchedData.error != true) {
+        // OwnerBusListApiResModel resModel = fetchedData.data;
+
+        // if (resModel.busList != null && resModel.busList!.isNotEmpty) {
+        //   bussesList = resModel.busList!
+        //       .map((e) => CustomDropDownModel(id: e.id.toString(), value: e.id.toString(), text: e.name.toString()))
+        //       .toList();
+        // }
+        // print(bussesList.length);
+
+        isPostLoading = false;
+        notifyListeners();
+        return true;
+      } else {
+        isPostLoading = false;
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      isPostLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  onBusSelection(CustomDropDownModel assignedBus) {
+    selectedBus = assignedBus;
+    notifyListeners();
+  }
+
+  onTimeSelection({bool isStart = true, required String selectedTime}) {
+    if (isStart) {
+      selectedStartTime = selectedTime;
+    } else {
+      selectedEndTime = selectedTime;
+    }
+    print("$selectedStartTime - startTime");
+    print("$selectedEndTime - endTime");
+    notifyListeners();
   }
 }
