@@ -10,9 +10,14 @@ import '../../../global_widgets/reusable_textfield_widget.dart';
 
 import '../../admin_login/view/admin_login_screen.dart';
 
-class AdminRegistration extends StatelessWidget {
+class AdminRegistration extends StatefulWidget {
   AdminRegistration({super.key});
 
+  @override
+  State<AdminRegistration> createState() => _AdminRegistrationState();
+}
+
+class _AdminRegistrationState extends State<AdminRegistration> {
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

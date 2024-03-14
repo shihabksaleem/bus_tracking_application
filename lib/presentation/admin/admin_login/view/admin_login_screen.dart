@@ -16,13 +16,11 @@ class AdminLoginScreen extends StatefulWidget {
 }
 
 class _AdminLoginScreenState extends State<AdminLoginScreen> {
-  final emailController = TextEditingController();
-
+  final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
   //form keys
-  final emailFormKey = GlobalKey<FormState>();
-
+  final userNameFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
 
   @override
@@ -57,19 +55,16 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                       //first widget
                       ReusableTextFieldWidget(
                         prefixIcon: const Icon(Icons.email, color: Colors.blue),
-                        name: "Email Address",
-                        controller: emailController,
-                        formKey: emailFormKey,
+                        name: "Username",
+                        controller: userNameController,
+                        formKey: userNameFormKey,
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter your email address';
-                          } else if (!RegExp(
-                                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                              .hasMatch(value)) {
-                            return 'Please enter a valid email address';
+                          if (userNameController.text.isNotEmpty) {
+                            return null;
+                          } else {
+                            return "Enter a valid user name";
                           }
-                          return null;
                         },
                       ),
                       //second widget for password
@@ -108,12 +103,12 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                   MaterialStatePropertyAll(Colors.black),
                               shape: MaterialStatePropertyAll(StadiumBorder())),
                           onPressed: () {
-                            if (emailFormKey.currentState!.validate() &&
+                            if (userNameFormKey.currentState!.validate() &&
                                 passwordFormKey.currentState!.validate()) {
                               Provider.of<AdminLoginScreenController>(context,
                                       listen: false)
                                   .onAdminLogin(
-                                email: emailController.text,
+                                userName: userNameController.text,
                                 password: passwordController.text,
                               )
                                   .then((value) {

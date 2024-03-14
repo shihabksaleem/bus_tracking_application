@@ -14,7 +14,7 @@ class AdminLoginScreenController extends ChangeNotifier {
   bool isPasswordVisible = false;
 
   Future<bool> onAdminLogin(
-      {required String email, required String password}) async {
+      {required String userName, required String password}) async {
     sharedPreferences = await SharedPreferences.getInstance();
     isLoading = true;
     notifyListeners();
@@ -22,7 +22,7 @@ class AdminLoginScreenController extends ChangeNotifier {
     try {
       // need to update values from  user input
       final fetchedData = await AdminLoginScreenService().onAdminLogin(body: {
-        "email": email,
+        "username": userName,
         "password": password,
       });
       if (fetchedData.error != true) {

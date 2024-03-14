@@ -14,8 +14,8 @@ class AdminRegistrationScreenController with ChangeNotifier {
       final fetchData = await AdminRegistrationScreenService().onRegisteration(
         body: {
           "username": userName,
-          "email": email,
           "password": password,
+          "email_address": email,
         },
       );
       if (fetchData.error != true) {
