@@ -1,6 +1,7 @@
 import 'package:bus_tracking_application/app_config/app_config_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/controller/bus_owner_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/controller/bus_owner_registration_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_routes_bottom_screen/controller/o_routes_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_registration_screen/controller/passenget_registration_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passernger_login_screen/controller/passenger_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_home_screen/controller/passenger_home_screen_controller.dart';
@@ -20,12 +21,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => PassengerLoginScreenController()),
-        ChangeNotifierProvider(create: (context) => PassengerHomeScreenController()),
-        ChangeNotifierProvider(create: (context) => RouteDetailsScreenController()),
-        ChangeNotifierProvider(create: (context) => BusOwnerLoginScreenController()),
-        ChangeNotifierProvider(create: (context) => BusOwnerRegistrationScreenController()),
-        ChangeNotifierProvider(create: (context) => PassengerRegistrationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => PassengerLoginScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => PassengerHomeScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => RouteDetailsScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => BusOwnerLoginScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => BusOwnerRegistrationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => PassengerRegistrationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => ORoutesBottomScreenControlller()),
       ],
       child: MaterialApp(
         navigatorKey: AppConfigController.navigatorState,

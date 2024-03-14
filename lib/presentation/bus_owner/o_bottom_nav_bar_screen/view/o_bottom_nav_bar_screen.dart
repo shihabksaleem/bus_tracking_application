@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/route_selection_screen/view/route_selection_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_routes_bottom_screen/view/o_routes_bottom_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/color_constants.dart';
@@ -19,13 +19,14 @@ class _OBottomNavBarScreenState extends State<OBottomNavBarScreen> {
   int selectedTabIndex = 0;
 
   final List<Widget> ownerMainScreens = [
-    RouteSelectionScreen(),
+    ORoutesBottomScreen(),
     OwnerHomeScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(),
+    return Scaffold(
+      appBar: AppBar(),
       drawer: ReusableDrawerWidget(
         name: 'username',
         email: 'address',
@@ -72,7 +73,6 @@ class _OBottomNavBarScreenState extends State<OBottomNavBarScreen> {
                 icon: Icon(Icons.directions_bus_outlined),
                 label: "Busses"),
           ]),
-
     );
   }
 }
