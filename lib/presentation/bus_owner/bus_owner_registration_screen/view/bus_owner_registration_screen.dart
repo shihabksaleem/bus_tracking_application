@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '../../owner_home_screen/owner_home_screen.dart';
+
 
 class BusOwnerRegistrationScreen extends StatelessWidget {
   final userNameController = TextEditingController();
