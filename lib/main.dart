@@ -1,11 +1,13 @@
 import 'package:bus_tracking_application/app_config/app_config_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/controller/bus_owner_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/controller/bus_owner_registration_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/controller/owner_bus_details_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_registration_screen/controller/passenget_registration_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passernger_login_screen/controller/passenger_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_home_screen/controller/passenger_home_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/common_screen/splash_screen/veiw/splash_screen.dart';
 import 'package:bus_tracking_application/presentation/passenger/route_details_screen/controller/route_details_screen_controller.dart';
+import 'package:bus_tracking_application/repository/api/bus_owner/owner_bus_details_screen/services/owner_bus_details_screen_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +22,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => PassengerLoginScreenController()),
-        ChangeNotifierProvider(create: (context) => PassengerHomeScreenController()),
-        ChangeNotifierProvider(create: (context) => RouteDetailsScreenController()),
-        ChangeNotifierProvider(create: (context) => BusOwnerLoginScreenController()),
-        ChangeNotifierProvider(create: (context) => BusOwnerRegistrationScreenController()),
-        ChangeNotifierProvider(create: (context) => PassengerRegistrationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => PassengerLoginScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => PassengerHomeScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => RouteDetailsScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => BusOwnerLoginScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => BusOwnerRegistrationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => PassengerRegistrationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => OwnerBusDetailScreenController()),
       ],
       child: MaterialApp(
         navigatorKey: AppConfigController.navigatorState,
