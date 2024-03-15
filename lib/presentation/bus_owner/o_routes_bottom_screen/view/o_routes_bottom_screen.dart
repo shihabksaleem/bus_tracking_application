@@ -26,20 +26,26 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await Provider.of<ORoutesBottomScreenControlller>(context, listen: false).getBusList();
-      await Provider.of<ORoutesBottomScreenControlller>(context, listen: false).getRoutesList();
+      await Provider.of<ORoutesBottomScreenControlller>(context, listen: false)
+          .getBusList();
+      await Provider.of<ORoutesBottomScreenControlller>(context, listen: false)
+          .getRoutesList();
+      await Provider.of<ORoutesBottomScreenControlller>(context, listen: false)
+          .getDriversList();
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final routesScreenState = Provider.of<ORoutesBottomScreenControlller>(context);
+    final routesScreenState =
+        Provider.of<ORoutesBottomScreenControlller>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("Available Routes", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          title: const Text("Available Routes",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
         ),
         body: routesScreenState.isLoading
             ? Center(
@@ -48,7 +54,8 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
             : Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ListView.builder(
-                    itemCount: routesScreenState.routesListResModel?.data?.length ?? 0,
+                    itemCount:
+                        routesScreenState.routesListResModel?.data?.length ?? 0,
                     itemBuilder: (context, index) {
                       return Container(
                         height: 100,
@@ -65,12 +72,16 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                               child: Padding(
                                 padding: const EdgeInsets.all(15.0),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      routesScreenState.routesListResModel?.data?[index].startsFrom!.toUpperCase() ??
+                                      routesScreenState.routesListResModel
+                                              ?.data?[index].startsFrom!
+                                              .toUpperCase() ??
                                           "",
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Wrap(
                                       children: List.generate(5, (dotindex) {
@@ -79,20 +90,29 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                                           width: 4,
                                           height: 4,
                                           color: ColorConstants.mainWhite,
-                                          child: const DecoratedBox(decoration: BoxDecoration(color: Colors.white)),
+                                          child: const DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white)),
                                         );
                                       }),
                                     ),
                                     Text(
-                                      routesScreenState.routesListResModel?.data?[index].endsAt!.toUpperCase() ?? "",
-                                      style: const TextStyle(fontWeight: FontWeight.bold),
+                                      routesScreenState.routesListResModel
+                                              ?.data?[index].endsAt!
+                                              .toUpperCase() ??
+                                          "",
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     IconButton(
                                         onPressed: () {
                                           assignBuses(
-                                              routeid:
-                                                  routesScreenState.routesListResModel?.data?[index].id.toString() ??
-                                                      "");
+                                              routeid: routesScreenState
+                                                      .routesListResModel
+                                                      ?.data?[index]
+                                                      .id
+                                                      .toString() ??
+                                                  "");
                                         },
                                         icon: const Icon(
                                           Icons.add_circle_sharp,
@@ -120,7 +140,9 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
       currentTime = time;
 
       Provider.of<ORoutesBottomScreenControlller>(context, listen: false)
-          .onTimeSelection(isStart: isStartTime, selectedTime: '${currentTime.hour}:${currentTime.minute}');
+          .onTimeSelection(
+              isStart: isStartTime,
+              selectedTime: '${currentTime.hour}:${currentTime.minute}');
     }
   }
 
@@ -130,12 +152,15 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
         isScrollControlled: true,
         context: context,
         builder: (context) {
-          final routesScreenState = Provider.of<ORoutesBottomScreenControlller>(context);
+          final routesScreenState =
+              Provider.of<ORoutesBottomScreenControlller>(context);
           return StatefulBuilder(
               builder: (context, setState) => Padding(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: Container(
-                      margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 30, horizontal: 20),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         // mainAxisAlignment: MainAxisAlignment.center,
@@ -143,15 +168,36 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                         children: [
                           const Text(
                             "Select the Bus",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
                           ),
                           CustomDropDownButton(
                             items: routesScreenState.bussesList ?? [],
                             value: routesScreenState.selectedBus,
                             onChanged: (value) {
                               if (value != null) {
-                                Provider.of<ORoutesBottomScreenControlller>(context, listen: false)
+                                Provider.of<ORoutesBottomScreenControlller>(
+                                        context,
+                                        listen: false)
                                     .onBusSelection(value);
+                                print(value.text);
+                              }
+                            },
+                          ),
+                          const Text(
+                            "Select Driver",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                          CustomDropDownButton(
+                            items: routesScreenState.driverList ?? [],
+                            value: routesScreenState.selectedDriver,
+                            onChanged: (value) {
+                              if (value != null) {
+                                Provider.of<ORoutesBottomScreenControlller>(
+                                        context,
+                                        listen: false)
+                                    .onDriversSelection(value);
                                 print(value.text);
                               }
                             },
@@ -159,7 +205,8 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                           ReusableTextFieldWidget(
                             keyboardType: TextInputType.none,
                             name: "Start time",
-                            controller: TextEditingController(text: routesScreenState.selectedStartTime),
+                            controller: TextEditingController(
+                                text: routesScreenState.selectedStartTime),
                             onTap: () {
                               selectTime();
                             },
@@ -169,7 +216,8 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                           ),
                           ReusableTextFieldWidget(
                             name: "End time",
-                            controller: TextEditingController(text: routesScreenState.selectedEndTime),
+                            controller: TextEditingController(
+                                text: routesScreenState.selectedEndTime),
                             onTap: () {
                               selectTime(isStartTime: false);
                             },
@@ -183,16 +231,22 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                           routesScreenState.isPostLoading
                               ? const ReusableLoadingWidget()
                               : Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     ElevatedButton(
                                         style: const ButtonStyle(
-                                            backgroundColor: MaterialStatePropertyAll(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
                                               ColorConstants.mainBlue,
                                             ),
-                                            shape: MaterialStatePropertyAll(StadiumBorder())),
+                                            shape: MaterialStatePropertyAll(
+                                                StadiumBorder())),
                                         onPressed: () async {
-                                          await Provider.of<ORoutesBottomScreenControlller>(context, listen: false)
+                                          await Provider.of<
+                                                      ORoutesBottomScreenControlller>(
+                                                  context,
+                                                  listen: false)
                                               .assignBus(routeid: routeid);
                                         },
                                         child: const Text(
@@ -204,15 +258,19 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                                         )),
                                     ElevatedButton(
                                         style: const ButtonStyle(
-                                            backgroundColor: MaterialStatePropertyAll(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
                                               ColorConstants.mainBlue,
                                             ),
-                                            shape: MaterialStatePropertyAll(StadiumBorder())),
+                                            shape: MaterialStatePropertyAll(
+                                                StadiumBorder())),
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
                                         child: const Text("Cancel",
-                                            style: TextStyle(color: ColorConstants.mainWhite, fontSize: 16))),
+                                            style: TextStyle(
+                                                color: ColorConstants.mainWhite,
+                                                fontSize: 16))),
                                   ],
                                 ),
                         ],

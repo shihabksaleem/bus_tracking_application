@@ -1,4 +1,5 @@
 import 'package:bus_tracking_application/presentation/global_widgets/custom_drop_down_widget/model/custom_drop_down_model.dart';
+import 'package:bus_tracking_application/repository/api/bus_owner/o_routes_bottom_screen/models/o_drivers_list_res_model.dart';
 import 'package:bus_tracking_application/repository/api/bus_owner/o_routes_bottom_screen/models/o_routes_list_res_model.dart';
 import 'package:bus_tracking_application/repository/api/bus_owner/o_routes_bottom_screen/models/owner_bus_list_api_res_model.dart';
 import 'package:bus_tracking_application/repository/api/bus_owner/o_routes_bottom_screen/service/o_routes_bottom_screen_service.dart';
@@ -14,10 +15,10 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
   String? selectedStartTime;
   String? selectedEndTime;
 
-  // List<CustomDropDownModel> driverList = [];
+  List<CustomDropDownModel> driverList = [];
 
   CustomDropDownModel? selectedBus;
-  // CustomDropDownModel? selectedDriver;
+  CustomDropDownModel? selectedDriver;
 
   // to Fetch the Course demo videos
   Future<bool> getRoutesList() async {
@@ -61,7 +62,13 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
 
         if (resModel.busList != null && resModel.busList!.isNotEmpty) {
           bussesList = resModel.busList!
-              .map((e) => CustomDropDownModel(id: e.id.toString(), value: e.id.toString(), text: e.name.toString()))
+              .map(
+                (e) => CustomDropDownModel(
+                  id: e.id.toString(),
+                  value: e.id.toString(),
+                  text: e.name.toString(),
+                ),
+              )
               .toList();
         }
         print(bussesList.length);
@@ -81,7 +88,44 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
     }
   }
 
-  // to Fetch the Course demo videos
+  // to get the drivers detials
+  Future<bool> getDriversList() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      // need to update values from  user input
+      final fetchedData = await ORouteBottomScreenService().getDriversList();
+      if (fetchedData.error != true) {
+        ODriversListResModel resModel = fetchedData.data;
+
+        if (resModel.driversList != null && resModel.driversList!.isNotEmpty) {
+          driverList = resModel.driversList!
+              .map((element) => CustomDropDownModel(
+                  id: element.id.toString(),
+                  value: element.id.toString(),
+                  text: element.name.toString()))
+              .toList();
+        }
+        print(driverList.length);
+
+        isLoading = false;
+        notifyListeners();
+        return true;
+      } else {
+        isLoading = false;
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  // to assign bus to a route
   Future<bool> assignBus({required String routeid}) async {
     sharedPreferences = await SharedPreferences.getInstance();
     isPostLoading = true;
@@ -89,7 +133,8 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
 
     try {
       // need to update values from  user input
-      final fetchedData = await ORouteBottomScreenService().assignBus(routeid: routeid, body: {
+      final fetchedData =
+          await ORouteBottomScreenService().assignBus(routeid: routeid, body: {
         "start_time": selectedStartTime,
         "end_time": selectedEndTime,
         "bus": int.tryParse(selectedBus!.id),
@@ -119,8 +164,13 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
     }
   }
 
-  onBusSelection(CustomDropDownModel assignedBus) {
-    selectedBus = assignedBus;
+  onBusSelection(CustomDropDownModel value) {
+    selectedBus = value;
+    notifyListeners();
+  }
+
+  onDriversSelection(CustomDropDownModel value) {
+    selectedDriver = value;
     notifyListeners();
   }
 

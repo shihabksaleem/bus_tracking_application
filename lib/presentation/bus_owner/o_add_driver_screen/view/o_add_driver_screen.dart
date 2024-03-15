@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-class OwnerAddDriver extends StatefulWidget {
-  const OwnerAddDriver({super.key});
+class OwnerAddDriverScreen extends StatefulWidget {
+  const OwnerAddDriverScreen({super.key});
 
   @override
-  State<OwnerAddDriver> createState() => _OwnerAddDriverState();
+  State<OwnerAddDriverScreen> createState() => _OwnerAddDriverScreenState();
 }
 
-class _OwnerAddDriverState extends State<OwnerAddDriver> {
+class _OwnerAddDriverScreenState extends State<OwnerAddDriverScreen> {
   TextEditingController driverNameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController phNoController = TextEditingController();
@@ -54,7 +54,8 @@ class _OwnerAddDriverState extends State<OwnerAddDriver> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Driver Details", style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500)),
+        title: Text("Driver Details",
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500)),
         centerTitle: true,
         surfaceTintColor: ColorConstants.mainWhite,
         elevation: 0,
@@ -134,13 +135,17 @@ class _OwnerAddDriverState extends State<OwnerAddDriver> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(ColorConstants.mainBlue),
+                      backgroundColor:
+                          MaterialStatePropertyAll(ColorConstants.mainBlue),
                       shape: MaterialStatePropertyAll(StadiumBorder())),
                   onPressed: () {
                     _showLogoutDialogBox(context);
                   },
                   child: const Text("Confirm",
-                      style: TextStyle(color: ColorConstants.mainWhite, fontSize: 22, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          color: ColorConstants.mainWhite,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold)),
                 ),
               ),
             ],

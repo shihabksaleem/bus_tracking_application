@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/owner_driver_screen/owner_add_driver.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_add_driver_screen/view/o_add_driver_screen.dart';
 import 'package:flutter/material.dart';
 
 class OwnerDriverScreen extends StatefulWidget {
@@ -79,7 +79,7 @@ class _OwnerDriverScreenState extends State<OwnerDriverScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OwnerAddDriver(),
+              builder: (context) => OwnerAddDriverScreen(),
             ),
           );
         },

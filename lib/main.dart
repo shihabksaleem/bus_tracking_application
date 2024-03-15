@@ -39,6 +39,8 @@ class MyApp extends StatelessWidget {
             create: (context) => AdminRegistrationScreenController()),
         ChangeNotifierProvider(
             create: (context) => AdminLoginScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => ORoutesBottomScreenControlller()),
       ],
       child: MaterialApp(
         navigatorKey: AppConfigController.navigatorState,
