@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_bottom_nav_bar_screen/view/o_bottom_nav_bar_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,8 +54,7 @@ class _OwnerAddDriverScreenState extends State<OwnerAddDriverScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Driver Details",
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500)),
+        title: Text("Driver Details", style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500)),
         centerTitle: true,
         surfaceTintColor: ColorConstants.mainWhite,
         elevation: 0,
@@ -135,17 +134,13 @@ class _OwnerAddDriverScreenState extends State<OwnerAddDriverScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: const ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll(ColorConstants.mainBlue),
+                      backgroundColor: MaterialStatePropertyAll(ColorConstants.mainBlue),
                       shape: MaterialStatePropertyAll(StadiumBorder())),
                   onPressed: () {
                     _showLogoutDialogBox(context);
                   },
                   child: const Text("Confirm",
-                      style: TextStyle(
-                          color: ColorConstants.mainWhite,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold)),
+                      style: TextStyle(color: ColorConstants.mainWhite, fontSize: 22, fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -182,7 +177,7 @@ class _OwnerAddDriverScreenState extends State<OwnerAddDriverScreen> {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => OwnerHomeScreen(),
+                        builder: (context) => OBottomNavBarScreen(),
                       ),
                       (route) => false);
                 },

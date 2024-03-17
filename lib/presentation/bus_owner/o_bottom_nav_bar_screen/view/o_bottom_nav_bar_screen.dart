@@ -1,10 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:bus_tracking_application/presentation/bus_owner/o_driver_bottom_screen/view/o_driver_bottom_screen.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/owner_home_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_routes_bottom_screen/view/o_routes_bottom_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/view/owner_home_screen.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/route_selection_screen/view/route_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/color_constants.dart';
@@ -29,19 +27,16 @@ class _OBottomNavBarScreenState extends State<OBottomNavBarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(),
+    return Scaffold(
+      appBar: AppBar(),
       drawer: ReusableDrawerWidget(
         name: 'username',
         email: 'address',
         drawerItems: [
           DrawerItem(icon: Icons.bus_alert, title: ' Bus Route', onTap: () {}),
-          DrawerItem(
-              icon: Icons.directions_bus, title: 'Track my bus', onTap: () {}),
+          DrawerItem(icon: Icons.directions_bus, title: 'Track my bus', onTap: () {}),
           DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
-          DrawerItem(
-              icon: Icons.privacy_tip_outlined,
-              title: 'Terms & Condition',
-              onTap: () {}),
+          DrawerItem(icon: Icons.privacy_tip_outlined, title: 'Terms & Condition', onTap: () {}),
           DrawerItem(
               icon: Icons.power_settings_new,
               title: 'Logout',
@@ -67,10 +62,7 @@ class _OBottomNavBarScreenState extends State<OBottomNavBarScreen> {
           selectedItemColor: ColorConstants.mainBlue,
           unselectedItemColor: ColorConstants.mainBlack.withOpacity(.4),
           items: [
-            BottomNavigationBarItem(
-                activeIcon: Icon(Icons.route),
-                icon: Icon(Icons.route_outlined),
-                label: "Routes"),
+            BottomNavigationBarItem(activeIcon: Icon(Icons.route), icon: Icon(Icons.route_outlined), label: "Routes"),
             BottomNavigationBarItem(
                 activeIcon: Icon(Icons.directions_bus_filled_sharp),
                 icon: Icon(Icons.directions_bus_outlined),
@@ -80,7 +72,6 @@ class _OBottomNavBarScreenState extends State<OBottomNavBarScreen> {
                 icon: Icon(Icons.personal_injury_outlined),
                 label: "Driver"),
           ]),
-
     );
   }
 }
