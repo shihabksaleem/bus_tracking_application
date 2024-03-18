@@ -29,10 +29,10 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
   final busNumberFormKey = GlobalKey<FormState>();
 
 //to hold the selected drop down value
-  String? selectedIsActive;
+  bool? selectedIsActive = true;
 
   // sample list off bus routes
-  List<String> isActiveOptions = ["True", "false"];
+  List<bool> isActiveOptions = [true, false];
 
   @override
   Widget build(BuildContext context) {
@@ -101,45 +101,49 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
                 // },
               ),
               SizedBox(height: 10),
-              Text(
-                "Bus Image",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              SizedBox(height: 10),
+              // Text(
+              //   "Bus Image",
+              //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              // ),
+              // SizedBox(height: 10),
               //third widget to upload bus image
-              Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 1, color: Colors.black.withOpacity(0.2))),
-                  height: 250,
-                  width: double.infinity,
-                  child: content),
+              // Container(
+              //     decoration: BoxDecoration(
+              //         border: Border.all(
+              //             width: 1, color: Colors.black.withOpacity(0.2))),
+              //     height: 250,
+              //     width: double.infinity,
+              //     child: content),
               SizedBox(height: 10),
-              Text(
-                "Bus Status-Active/InActive",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              Row(
+                children: [
+                  Text(
+                    "Bus Status ",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  SizedBox(width: 20),
+                  SizedBox(
+                    height: 50,
+                    child: DropdownButton<bool>(
+                      hint: Text('Select'),
+                      value: selectedIsActive,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          selectedIsActive = value; // Update the selected value
+                        });
+                      },
+                      items: isActiveOptions.map((bool value) {
+                        return DropdownMenuItem<bool>(
+                          value: value,
+                          child: Text(value.toString().toUpperCase()),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 10),
 
               // widget to select ISAcTive route
-              SizedBox(
-                height: 50,
-                child: DropdownButton<String>(
-                  hint: Text('Select IsActive'),
-                  value: selectedIsActive,
-                  onChanged: (String? value) {
-                    setState(() {
-                      selectedIsActive = value; // Update the selected value
-                    });
-                  },
-                  items: isActiveOptions.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
-              ),
 
               SizedBox(height: 10),
               // widget for confirm button
@@ -254,6 +258,7 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
       ),
     );
   }
+
   //to show the options of image
   void _pickImageDialog() {
     showDialog(
@@ -294,7 +299,6 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
       return null;
     } else {
       setState(() {
-
         selectedImage = File(pickedImage.path); //as pickedImage is XFile type
       });
     }

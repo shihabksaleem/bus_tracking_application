@@ -1,3 +1,4 @@
+import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class ReusableDrawerWidget extends StatelessWidget {
               Container(
                 height: 90,
                 width: 90,
+
                 ///todo: image of the user
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -71,7 +73,7 @@ class ReusableDrawerWidget extends StatelessWidget {
     return InkWell(
       onTap: item.onTap,
       child: ListTile(
-        leading: Icon(item.icon, color: Colors.blue),
+        leading: Icon(item.icon, color: item.iconColor),
         title: Text(
           item.title,
           style: TextStyle(
@@ -84,11 +86,13 @@ class ReusableDrawerWidget extends StatelessWidget {
 
 class DrawerItem {
   final IconData icon;
+  final Color iconColor;
   final String title;
 
   final VoidCallback onTap;
 
   DrawerItem({
+    this.iconColor = ColorConstants.mainBlue,
     required this.icon,
     required this.title,
     required this.onTap,

@@ -1,3 +1,4 @@
+import 'package:bus_tracking_application/core/app_utils/app_utils.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/buses_assigned_screen/view/buses_assigned_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_routes_bottom_screen/controller/o_routes_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/custom_drop_down_widget/view/custom_drop_down_butto.dart';
@@ -247,7 +248,16 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                                                       ORoutesBottomScreenControlller>(
                                                   context,
                                                   listen: false)
-                                              .assignBus(routeid: routeid);
+                                              .assignBus(routeid: routeid)
+                                              .then((value) {
+                                            if (value) {
+                                              AppUtils.oneTimeSnackBar(
+                                                  bgColor: Colors.green,
+                                                  "Bus assigned sucessfully",
+                                                  context: context);
+                                              Navigator.pop(context);
+                                            }
+                                          });
                                         },
                                         child: const Text(
                                           "Confirm",

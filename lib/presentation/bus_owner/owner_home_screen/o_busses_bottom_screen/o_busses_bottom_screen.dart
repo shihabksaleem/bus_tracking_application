@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
+import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/controller/owner_bus_details_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/view/owner_bus_details.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
@@ -11,14 +12,14 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/app_utils/app_utils.dart';
 
-class OwnerHomeScreen extends StatefulWidget {
-  const OwnerHomeScreen({super.key});
+class OBusesBottomScreen extends StatefulWidget {
+  const OBusesBottomScreen({super.key});
 
   @override
-  State<OwnerHomeScreen> createState() => _OwnerHomeScreenState();
+  State<OBusesBottomScreen> createState() => _OBusesBottomScreenState();
 }
 
-class _OwnerHomeScreenState extends State<OwnerHomeScreen> {
+class _OBusesBottomScreenState extends State<OBusesBottomScreen> {
   late List<OwnerBusDetailsListModel> ownerBusListModel;
 
   @override
@@ -33,7 +34,6 @@ class _OwnerHomeScreenState extends State<OwnerHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -60,9 +60,7 @@ class _OwnerHomeScreenState extends State<OwnerHomeScreen> {
                         color: Color(0xFFC8E6C9),
                       ),
                       child: ListTile(
-                        leading: CircleAvatar(
-                          child: Image.network(busDetails.image ?? ""),
-                        ),
+                        leading: Image.asset(ImageConstants.busesPng),
                         title: Text(
                           busDetails.name ?? "",
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -71,36 +69,37 @@ class _OwnerHomeScreenState extends State<OwnerHomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Owner_Name: ${busDetails.busowner ?? ""}",
+                              "Owner : ${busDetails.busowner ?? ""}",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text("Bus_no:${busDetails.numberPlate ?? ""}",
+                            Text("Bus no:${busDetails.numberPlate ?? ""}",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text("Engine_Number: ${busDetails.engineNo ?? ""}",
+                            Text("Engine Number: ${busDetails.engineNo ?? ""}",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Text(
-                                "Rc_Book: ${busDetails.rcBook ?? "Not Updated"}",
+                                "Rc Book: ${busDetails.rcBook ?? "Not Updated"}",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text("IsActive:${busDetails.isActive ?? ""}",
+                            Text(
+                                "Is Active: ${busDetails.isActive == true ? "Active" : "Inactive"}",
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                           ],
                         ),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.edit_outlined),
-                            ),
-                            IconButton(
-                              onPressed: () {
 
-                              },
-                              icon: Icon(Icons.delete_outline_rounded),
-                              color: Colors.red,
-                            ),
-                          ],
-                        ),
+                        // Todo: uncomment if needed  to bus edit  and delete
+                        // trailing: Row(
+                        //   mainAxisSize: MainAxisSize.min,
+                        //   children: [
+                        //     IconButton(
+                        //       onPressed: () {},
+                        //       icon: Icon(Icons.edit_outlined),
+                        //     ),
+                        //     IconButton(
+                        //       onPressed: () {},
+                        //       icon: Icon(Icons.delete_outline_rounded),
+                        //       color: Colors.red,
+                        //     ),
+                        //   ],
+                        // ),
                       ),
                     );
                   },

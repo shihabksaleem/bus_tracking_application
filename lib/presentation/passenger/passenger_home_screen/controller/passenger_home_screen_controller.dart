@@ -39,7 +39,8 @@ class PassengerHomeScreenController extends ChangeNotifier {
     }
   }
 
-  Future<bool> getSearchResult({required String startingPoint, required String endPoint}) async {
+  Future<bool> getSearchResult(
+      {required String startingPoint, required String endPoint}) async {
     isLoading = true;
     searchResultResModel = null;
 
@@ -47,7 +48,8 @@ class PassengerHomeScreenController extends ChangeNotifier {
 
     try {
       // need to update values from  user input
-      final fetchedData = await PassengerHomeScreenService().getSearchResult(body: {
+      final fetchedData =
+          await PassengerHomeScreenService().getSearchResult(body: {
         "starts_from": startingPoint,
         "ends_at": endPoint,
       });
@@ -55,14 +57,18 @@ class PassengerHomeScreenController extends ChangeNotifier {
         searchResultResModel = fetchedData.data;
         isLoading = false;
 
-        if (searchResultResModel == null || searchResultResModel?.buses?.length == 0) {
-          AppUtils.oneTimeSnackBar("No buses Found", context: AppConfigController.navigatorState.currentContext!);
+        if (searchResultResModel == null ||
+            searchResultResModel?.buses?.length == 0) {
+          AppUtils.oneTimeSnackBar("No buses Found",
+              context: AppConfigController.navigatorState.currentContext!);
         }
         notifyListeners();
         return true;
       } else {
-        if (searchResultResModel == null || searchResultResModel?.buses?.length == 0) {
-          AppUtils.oneTimeSnackBar("No buses Found", context: AppConfigController.navigatorState.currentContext!);
+        if (searchResultResModel == null ||
+            searchResultResModel?.buses?.length == 0) {
+          AppUtils.oneTimeSnackBar("No buses Found",
+              context: AppConfigController.navigatorState.currentContext!);
         }
         isLoading = false;
         notifyListeners();
@@ -72,6 +78,37 @@ class PassengerHomeScreenController extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
       return false;
+    }
+  }
+
+  Future<bool> sendAlert() async {
+    isLoading = true;
+
+    notifyListeners();
+
+    try {
+      // need to update values from  user input
+      final fetchedData =
+          await PassengerHomeScreenService().sendAlert(body: {});
+      if (fetchedData.error != true) {
+        notifyListeners();
+        isLoading = false;
+        print("successs 2");
+        return true;
+      } else {
+        isLoading = false;
+        print("failes 3");
+
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      isLoading = false;
+      print("fail 4");
+
+      notifyListeners();
+      // return false;
+      rethrow;
     }
   }
 }

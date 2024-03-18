@@ -138,6 +138,7 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
         "start_time": selectedStartTime,
         "end_time": selectedEndTime,
         "bus": int.tryParse(selectedBus!.id),
+        "busdriver": int.tryParse(selectedDriver!.id),
       });
       if (fetchedData.error != true) {
         // OwnerBusListApiResModel resModel = fetchedData.data;
