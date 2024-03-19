@@ -5,4 +5,5 @@ class ImageConstants {
   static const String mapSampleImageJpg = "assets/images/map_sample_image.jpg";
   static const String fuelStationPng = "assets/images/fuel_station_png.png";
   static const String busesPng = "assets/images/bus_png.png";
+  static const String workShopPng = "assets/images/workshop_png.png";
 }

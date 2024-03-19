@@ -2,8 +2,10 @@
 
 import 'package:bus_tracking_application/presentation/bus_owner/o_driver_bottom_screen/view/o_driver_bottom_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_near_by_fuel_stations/view/o_nearby_fuel_stations_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_near_by_workshops/view/o_near_by_workshops.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_routes_bottom_screen/view/o_routes_bottom_screen.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/owner_home_screen/o_busses_bottom_screen/o_busses_bottom_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_busses_bottom_screen/view/o_busses_bottom_screen.dart';
+import 'package:bus_tracking_application/presentation/passenger/terms_and_conditions_screen/view/terms_and_conditions_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/constants/color_constants.dart';
@@ -44,11 +46,27 @@ class _OBottomNavBarScreenState extends State<OBottomNavBarScreen> {
                       builder: (context) => ONearbyFuelStations(),
                     ));
               }),
-          DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
+          DrawerItem(
+              icon: Icons.miscellaneous_services_sharp,
+              title: 'Near by work shops',
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ONearbyWorkshops(),
+                    ));
+              }),
+          // DrawerItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
           DrawerItem(
               icon: Icons.privacy_tip_outlined,
               title: 'Terms & Condition',
-              onTap: () {}),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TermsAndConditionsScreen(),
+                    ));
+              }),
           DrawerItem(
               icon: Icons.power_settings_new,
               title: 'Logout',

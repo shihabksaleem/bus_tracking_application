@@ -2,6 +2,7 @@
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_busses_bottom_screen/controller/o_busses_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/controller/owner_bus_details_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/view/owner_bus_details.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
@@ -26,7 +27,7 @@ class _OBusesBottomScreenState extends State<OBusesBottomScreen> {
   void initState() {
     // TODO: implement initState
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<OwnerBusDetailScreenController>(context, listen: false)
+      Provider.of<OBussesBottomScreenController>(context, listen: false)
           .getBusList();
     });
     super.initState();
@@ -42,7 +43,7 @@ class _OBusesBottomScreenState extends State<OBusesBottomScreen> {
         ),
         centerTitle: true,
       ),
-      body: Consumer<OwnerBusDetailScreenController>(
+      body: Consumer<OBussesBottomScreenController>(
         builder: (context, controller, child) {
           return controller.isLoading
               ? Center(

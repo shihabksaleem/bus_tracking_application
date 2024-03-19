@@ -7,9 +7,11 @@ class RouteAndBusDetailsResModel {
     this.routeDetails,
   });
 
-  factory RouteAndBusDetailsResModel.fromJson(Map<String, dynamic> json) => RouteAndBusDetailsResModel(
+  factory RouteAndBusDetailsResModel.fromJson(Map<String, dynamic> json) =>
+      RouteAndBusDetailsResModel(
         status: json["status"],
-        routeDetails: json["data"] == null ? null : RouteDetails.fromJson(json["data"]),
+        routeDetails:
+            json["data"] == null ? null : RouteDetails.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -45,9 +47,12 @@ class RouteDetails {
         isActive: json["is_active"],
         assignedBussesList: json["bus assigned"] == null
             ? []
-            : List<BusAssigned>.from(json["bus assigned"]!.map((x) => BusAssigned.fromJson(x))),
-        stopsList:
-            json["stops"] == null ? [] : List<RouteBusStops>.from(json["stops"]!.map((x) => RouteBusStops.fromJson(x))),
+            : List<BusAssigned>.from(
+                json["bus assigned"]!.map((x) => BusAssigned.fromJson(x))),
+        stopsList: json["stops"] == null
+            ? []
+            : List<RouteBusStops>.from(
+                json["stops"]!.map((x) => RouteBusStops.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,9 +61,12 @@ class RouteDetails {
         "starts_from": startsFrom,
         "ends_at": endsAt,
         "is_active": isActive,
-        "bus assigned":
-            assignedBussesList == null ? [] : List<dynamic>.from(assignedBussesList!.map((x) => x.toJson())),
-        "stops": stopsList == null ? [] : List<dynamic>.from(stopsList!.map((x) => x.toJson())),
+        "bus assigned": assignedBussesList == null
+            ? []
+            : List<dynamic>.from(assignedBussesList!.map((x) => x.toJson())),
+        "stops": stopsList == null
+            ? []
+            : List<dynamic>.from(stopsList!.map((x) => x.toJson())),
       };
 }
 

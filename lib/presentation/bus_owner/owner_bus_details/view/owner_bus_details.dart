@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_bottom_nav_bar_screen/view/o_bottom_nav_bar_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_busses_bottom_screen/controller/o_busses_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/controller/owner_bus_details_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
@@ -27,6 +28,7 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
 //form keys
   final busNameFormKey = GlobalKey<FormState>();
   final busNumberFormKey = GlobalKey<FormState>();
+  final engineNumberFormKey = GlobalKey<FormState>();
 
 //to hold the selected drop down value
   bool? selectedIsActive = true;
@@ -90,15 +92,16 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
                 },
               ),
               ReusableTextFieldWidget(
+                keyboardType: TextInputType.number,
+                formKey: engineNumberFormKey,
                 name: "Engine number",
                 controller: engineNumberController,
-                // formKey: busNameFormKey,
-                // validator: (value) {
-                //   if (value!.isEmpty) {
-                //     return 'please enter the bus name';
-                //   }
-                //   return null;
-                // },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'please enter the bus name';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 10),
               // Text(
@@ -114,34 +117,34 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
               //     height: 250,
               //     width: double.infinity,
               //     child: content),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Text(
-                    "Bus Status ",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  SizedBox(width: 20),
-                  SizedBox(
-                    height: 50,
-                    child: DropdownButton<bool>(
-                      hint: Text('Select'),
-                      value: selectedIsActive,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          selectedIsActive = value; // Update the selected value
-                        });
-                      },
-                      items: isActiveOptions.map((bool value) {
-                        return DropdownMenuItem<bool>(
-                          value: value,
-                          child: Text(value.toString().toUpperCase()),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
-              ),
+              // SizedBox(height: 10),
+              // Row(
+              //   children: [
+              //     Text(
+              //       "Bus Status ",
+              //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              //     ),
+              //     SizedBox(width: 20),
+              //     SizedBox(
+              //       height: 50,
+              //       child: DropdownButton<bool>(
+              //         hint: Text('Select'),
+              //         value: selectedIsActive,
+              //         onChanged: (bool? value) {
+              //           setState(() {
+              //             selectedIsActive = value; // Update the selected value
+              //           });
+              //         },
+              //         items: isActiveOptions.map((bool value) {
+              //           return DropdownMenuItem<bool>(
+              //             value: value,
+              //             child: Text(value.toString().toUpperCase()),
+              //           );
+              //         }).toList(),
+              //       ),
+              //     ),
+              //   ],
+              // ),
 
               // widget to select ISAcTive route
 
@@ -157,10 +160,39 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
                       shape: MaterialStatePropertyAll(StadiumBorder())),
                   onPressed: () {
                     if (busNameFormKey.currentState!.validate() &&
-                        busNumberFormKey.currentState!.validate() &&
-                        selectedImage != null &&
-                        selectedIsActive != null) {
-                      _showLogoutDialogBox(context);
+                            busNumberFormKey.currentState!.validate() &&
+                            engineNumberFormKey.currentState!.validate()
+                        // selectedImage != null &&
+                        // selectedIsActive != null
+                        ) {
+                      Provider.of<OwnerBusDetailScreenController>(context,
+                              listen: false)
+                          .toAddNewBusList(
+                        busName: busNameController.text,
+                        busNumber: busNumberController.text,
+                        engineNumber: engineNumberController.text,
+                        // image: selectedImage!.absolute,
+                        // isActive: selectedIsActive == "True" ? true : false,
+                      )
+                          .then((value) {
+                        if (value) {
+                          AppUtils.oneTimeSnackBar(
+                            "New bus Added SuccessFully",
+                            context: context,
+                            bgColor: ColorConstants.mainGreen,
+                          );
+                          Provider.of<OBussesBottomScreenController>(context,
+                                  listen: false)
+                              .getBusList();
+                          Navigator.pop(context);
+                        } else {
+                          AppUtils.oneTimeSnackBar(
+                            "failed to add",
+                            context: context,
+                            bgColor: ColorConstants.mainRed,
+                          );
+                        }
+                      });
                     } else {
                       AppUtils.oneTimeSnackBar(
                         "Please Fill all the fields",
@@ -183,81 +215,47 @@ class _OwnerBusDetailsState extends State<OwnerBusDetails> {
     );
   }
 
-  // Dialog box to confirm yes or no
-  Future<void> _showLogoutDialogBox(BuildContext context) async {
-    final ownerController =
-        Provider.of<OwnerBusDetailScreenController>(context, listen: false);
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          "Are you sure?",
-          style: TextStyle(fontSize: 22),
-        ),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  "No",
-                  style: TextStyle(color: ColorConstants.mainBlue),
-                ),
-              ),
-              ownerController.isLoading
-                  ? Center(
-                      child: ReusableLoadingWidget(),
-                    )
-                  : ElevatedButton(
-                      onPressed: () {
-                        Provider.of<OwnerBusDetailScreenController>(context,
-                                listen: false)
-                            .toAddNewBusList(
-                          busName: busNameController.text,
-                          busNumber: busNumberController.text,
-                          engineNumber: engineNumberController.text,
-                          image: selectedImage!.absolute,
-                          isActive: selectedIsActive == "True" ? true : false,
-                        )
-                            .then((value) {
-                          if (value) {
-                            AppUtils.oneTimeSnackBar(
-                              "New bus Added SuccessFully",
-                              context: context,
-                              bgColor: ColorConstants.mainGreen,
-                            );
-
-                            // Navigator.pop(context);
-                          } else {
-                            AppUtils.oneTimeSnackBar(
-                              "failed to add",
-                              context: context,
-                              bgColor: ColorConstants.mainRed,
-                            );
-                          }
-                        });
-
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OBottomNavBarScreen(),
-                            ),
-                            (route) => false);
-                      },
-                      child: Text(
-                        "Yes",
-                        style: TextStyle(color: ColorConstants.mainBlue),
-                      ),
-                    )
-            ],
-          )
-        ],
-      ),
-    );
-  }
+  // // Dialog box to confirm yes or no
+  // Future<void> _showLogoutDialogBox(BuildContext context) async {
+  //   final ownerController =
+  //       Provider.of<OwnerBusDetailScreenController>(context, listen: false);
+  //   return showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: Text(
+  //         "Are you sure?",
+  //         style: TextStyle(fontSize: 22),
+  //       ),
+  //       actions: [
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //           children: [
+  //             ElevatedButton(
+  //               onPressed: () {
+  //                 Navigator.pop(context);
+  //               },
+  //               child: Text(
+  //                 "No",
+  //                 style: TextStyle(color: ColorConstants.mainBlue),
+  //               ),
+  //             ),
+  //             ownerController.isLoading
+  //                 ? Center(
+  //                     child: ReusableLoadingWidget(),
+  //                   )
+  //                 : ElevatedButton(
+  //                     onPressed: () {},
+  //                     child: Text(
+  //                       "Yes",
+  //                       style: TextStyle(color: ColorConstants.mainBlue),
+  //                     ),
+  //                   )
+  //           ],
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   //to show the options of image
   void _pickImageDialog() {

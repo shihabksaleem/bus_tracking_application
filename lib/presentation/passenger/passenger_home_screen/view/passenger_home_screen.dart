@@ -244,9 +244,7 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
                                       (index) => PassengerHomeScreenBussesCard(
                                             routeId: userHomeScreenState
                                                     .searchResultResModel
-                                                    ?.buses?[index]
-                                                    .routeAssignments?[0]
-                                                    .routeId // Todo: route id need to be changed
+                                                    ?.routeId
                                                     .toString() ??
                                                 "",
                                             imagePath: userHomeScreenState

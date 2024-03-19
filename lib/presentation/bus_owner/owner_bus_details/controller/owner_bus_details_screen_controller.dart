@@ -8,39 +8,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class OwnerBusDetailScreenController with ChangeNotifier {
   bool isLoading = false;
   late SharedPreferences sharedPreferences;
-  OwnerBusDetailsListModel? busDetailsListModel;
+  // OwnerBusDetailsListModel? busDetailsListModel;
   AddBusDetailsModel? addBusDetailsModel;
-  bool showSpinner =false;
-  //to fetch the bus list
-  Future<bool> getBusList() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    isLoading = true;
-    notifyListeners();
-    try {
-      final fetchedData = await OwnerBusDetailsScreenService().getBusList();
-      if (fetchedData.error != true) {
-        busDetailsListModel = fetchedData.data;
-        isLoading = false;
-        notifyListeners();
-        return true;
-      } else {
-        isLoading = false;
-        notifyListeners();
-        return false;
-      }
-    } catch (e) {
-      isLoading = false;
-      notifyListeners();
-      return false;
-    }
-  }
+  bool showSpinner = false;
+
   //to add the bus
   Future<bool> toAddNewBusList({
     required String busName,
     required String busNumber,
     required String engineNumber,
-    required File? image,
-    required bool isActive,
+    // required File? image,
+    // required bool isActive,
   }) async {
     isLoading = true;
     notifyListeners();
@@ -48,13 +26,11 @@ class OwnerBusDetailScreenController with ChangeNotifier {
       final fetchedData =
           await OwnerBusDetailsScreenService().toPostBusDetails(body: {
         "name": busName,
-        "image":image,
+        // "image":image,
         "Number_plate": busNumber,
         "Engine_no": engineNumber,
-        "is_active": isActive,
       });
-      if (fetchedData.error != true)
-      {
+      if (fetchedData.error != true) {
         isLoading = false;
         notifyListeners();
         return true;
