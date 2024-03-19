@@ -44,7 +44,10 @@ class PassengerHomeScreenBussesCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: ColorConstants.mainWhite,
               boxShadow: [
-                BoxShadow(offset: Offset(6, 6), blurRadius: 8, color: ColorConstants.mainBlack.withOpacity(.6))
+                BoxShadow(
+                    offset: Offset(6, 6),
+                    blurRadius: 8,
+                    color: ColorConstants.mainBlack.withOpacity(.6))
               ]),
           child: Row(
             children: [
@@ -61,7 +64,7 @@ class PassengerHomeScreenBussesCard extends StatelessWidget {
                   SizedBox(height: 3),
                   Text(busNumber),
                   SizedBox(height: 3),
-                  Text(busRoute),
+                  // Text(busRoute),
                 ],
               ),
               Spacer(),

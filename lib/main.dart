@@ -6,6 +6,8 @@ import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_regist
 import 'package:bus_tracking_application/presentation/bus_owner/o_add_driver_screen/controller/o_add_driver_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_busses_bottom_screen/controller/o_busses_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_driver_bottom_screen/controller/o_driver_bottom_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_near_by_fuel_stations/controller/o_near_by_fuel_stations_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_near_by_workshops/controller/o_near_by_fuel_stations_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_routes_bottom_screen/controller/o_routes_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/controller/owner_bus_details_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_registration_screen/controller/passenget_registration_screen_controller.dart';
@@ -53,6 +55,10 @@ class MyApp extends StatelessWidget {
             create: (context) => OAddDriverScreenController()),
         ChangeNotifierProvider(
             create: (context) => OBussesBottomScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => ONearbyFuelStationsScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => ONearbyWorkShopsScreenController()),
       ],
       child: MaterialApp(
         navigatorKey: AppConfigController.navigatorState,

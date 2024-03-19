@@ -1,6 +1,9 @@
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_near_by_fuel_stations/controller/o_near_by_fuel_stations_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ONearbyFuelStations extends StatefulWidget {
@@ -11,20 +14,26 @@ class ONearbyFuelStations extends StatefulWidget {
 }
 
 class _ONearbyFuelStationsState extends State<ONearbyFuelStations> {
-  List<Map<String, String>> fulStations = [
-    {"brand": "ABC Fuel", "location": "Kochi, Kerala"},
-    {"brand": "XYZ Petroleum", "location": "Trivandrum, Kerala"},
-    {"brand": "FuelMart", "location": "Kozhikode, Kerala"},
-    // Add more stations as needed
-  ];
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await Provider.of<ONearbyFuelStationsScreenController>(context,
+              listen: false)
+          .getFuelStations(placeName: "kakkanad");
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final providerState =
+        Provider.of<ONearbyFuelStationsScreenController>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Fuel Stations"),
       ),
       body: ListView.builder(
-        itemCount: fulStations.length,
+        itemCount: providerState.fuelStationList.length,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
           child: Container(
@@ -45,16 +54,25 @@ class _ONearbyFuelStationsState extends State<ONearbyFuelStations> {
                     width: 50,
                     child: Image.asset(ImageConstants.fuelStationPng)),
                 SizedBox(width: 20),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(fulStations[index]['brand'].toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(fulStations[index]['location'].toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          providerState.fuelStationList[index].displayName
+                              .toString(),
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      // Text(
+                      //     providerState.fuelStationList[index].address?.city
+                      //             .toString() ??
+                      //         "",
+                      //     style: TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ),
-                Spacer(),
+                SizedBox(
+                  width: 15,
+                ),
                 IconButton(
                     onPressed: () async {
                       const url =

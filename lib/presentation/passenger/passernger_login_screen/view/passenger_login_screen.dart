@@ -38,13 +38,18 @@ class _PassengerLoginScreenState extends State<PassengerLoginScreen> {
               children: [
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Image.asset(ImageConstants.loginRegistrationPng)),
+                    child: Image.asset(ImageConstants.busesPng)),
+                SizedBox(
+                  height: 10,
+                ),
                 Align(
-                  alignment: Alignment.topLeft,
+                  alignment: Alignment.topCenter,
                   child: Text(
-                    "Welcome to \nBustapp ",
+                    " Welcome to VROOM!!",
                     style: GoogleFonts.roboto(
-                        fontSize: 26, fontWeight: FontWeight.w500),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(

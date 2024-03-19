@@ -2,10 +2,8 @@
 
 import 'dart:io';
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/o_bottom_nav_bar_screen/view/o_bottom_nav_bar_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_busses_bottom_screen/controller/o_busses_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/owner_bus_details/controller/owner_bus_details_screen_controller.dart';
-import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
