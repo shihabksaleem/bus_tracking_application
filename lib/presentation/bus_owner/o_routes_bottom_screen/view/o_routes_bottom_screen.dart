@@ -1,5 +1,5 @@
 import 'package:bus_tracking_application/core/app_utils/app_utils.dart';
-import 'package:bus_tracking_application/presentation/bus_owner/buses_assigned_screen/view/buses_assigned_screen.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_buses_assigned_screen/view/o_buses_assigned_screen.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_routes_bottom_screen/controller/o_routes_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/custom_drop_down_widget/view/custom_drop_down_butto.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
@@ -65,7 +65,12 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => BusesAssignedScreen(),
+                                  builder: (context) => OBusesAssignedScreen(
+                                    routeId: routesScreenState
+                                            .routesListResModel?.data?[index].id
+                                            .toString() ??
+                                        "",
+                                  ),
                                 ));
                           },
                           child: Card(

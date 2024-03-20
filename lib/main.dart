@@ -4,6 +4,7 @@ import 'package:bus_tracking_application/presentation/admin/admin_registration/c
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/controller/bus_owner_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/controller/bus_owner_registration_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_add_driver_screen/controller/o_add_driver_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/bus_owner/o_buses_assigned_screen/controller/o_busses_assigned_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_busses_bottom_screen/controller/o_busses_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_driver_bottom_screen/controller/o_driver_bottom_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/o_near_by_fuel_stations/controller/o_near_by_fuel_stations_screen_controller.dart';
@@ -59,6 +60,8 @@ class MyApp extends StatelessWidget {
             create: (context) => ONearbyFuelStationsScreenController()),
         ChangeNotifierProvider(
             create: (context) => ONearbyWorkShopsScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => OBussesAssignedScreenController()),
       ],
       child: MaterialApp(
         navigatorKey: AppConfigController.navigatorState,

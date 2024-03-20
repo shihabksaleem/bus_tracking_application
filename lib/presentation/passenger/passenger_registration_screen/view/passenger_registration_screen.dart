@@ -58,7 +58,7 @@ class PassengerRegistrationScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Join Bustapp community",
+                    "Join Vroom community",
                     style: GoogleFonts.roboto(
                         fontSize: 26, fontWeight: FontWeight.w500),
                   ),

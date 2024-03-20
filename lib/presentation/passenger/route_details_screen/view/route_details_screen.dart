@@ -25,14 +25,16 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<RouteDetailsScreenController>(context, listen: false).getRoutesDetails(routeId: widget.routeId);
+      Provider.of<RouteDetailsScreenController>(context, listen: false)
+          .getRoutesDetails(routeId: widget.routeId);
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final routeDetailsScreenState = Provider.of<RouteDetailsScreenController>(context);
+    final routeDetailsScreenState =
+        Provider.of<RouteDetailsScreenController>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -46,7 +48,10 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
               },
               icon: const Icon(Icons.arrow_back)),
           title: Text(
-            routeDetailsScreenState.routeAndBusDetailsResModel?.routeDetails?.name?.toUpperCase() ?? "",
+            routeDetailsScreenState
+                    .routeAndBusDetailsResModel?.routeDetails?.name
+                    ?.toUpperCase() ??
+                "",
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -56,8 +61,12 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
             Wrap(
               children: [
                 Text("",
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: ColorConstants.iconBlue)),
-                const Icon(Icons.directions_walk, color: ColorConstants.iconBlue)
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: ColorConstants.iconBlue)),
+                const Icon(Icons.directions_walk,
+                    color: ColorConstants.iconBlue)
               ],
             ),
           ],
@@ -76,12 +85,14 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                     height: MediaQuery.of(context).size.height * 0.5,
                     decoration: BoxDecoration(
                         image: const DecorationImage(
-                            image: AssetImage(ImageConstants.mapSampleImageJpg), fit: BoxFit.cover),
+                            image: AssetImage(ImageConstants.mapSampleImageJpg),
+                            fit: BoxFit.cover),
                         boxShadow: [
                           BoxShadow(
                             color: ColorConstants.mainBlack.withOpacity(0.5),
                             blurRadius: 8,
-                            offset: const Offset(0, 4), // changes position of shadow
+                            offset: const Offset(
+                                0, 4), // changes position of shadow
                           ),
                         ]),
                   ),
@@ -95,12 +106,19 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                     height: 75,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      border: Border(bottom: BorderSide(width: 0.6, color: ColorConstants.mainBlack.withOpacity(0.4))),
+                      border: Border(
+                          bottom: BorderSide(
+                              width: 0.6,
+                              color:
+                                  ColorConstants.mainBlack.withOpacity(0.4))),
                     ),
                     child: const Align(
                       alignment: Alignment.centerLeft,
                       child: Text("Buses Approaching",
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: ColorConstants.mainBlack)),
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              color: ColorConstants.mainBlack)),
                     ),
                   ),
                   //third widget to show the suggested bus
@@ -111,12 +129,21 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                         children: List.generate(
                           routeDetailsScreenState.asignedBusList.length,
                           (index) => ListTile(
-                            leading: Icon(Icons.directions_bus, color: ColorConstants.iconBlue),
-                            title: Text(routeDetailsScreenState.asignedBusList[index].bus?.toString() ?? "",
+                            leading: Icon(Icons.directions_bus,
+                                color: ColorConstants.iconBlue),
+                            title: Text(
+                                routeDetailsScreenState
+                                        .asignedBusList[index].bus?.name
+                                        ?.toString() ??
+                                    "",
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold, color: ColorConstants.mainBlack)),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: ColorConstants.mainBlack)),
                             subtitle: Text(
-                              routeDetailsScreenState.routeAndBusDetailsResModel?.routeDetails?.name?.toUpperCase() ??
+                              routeDetailsScreenState.routeAndBusDetailsResModel
+                                      ?.routeDetails?.name
+                                      ?.toUpperCase() ??
                                   "",
                             ),
                             trailing: Row(
@@ -124,19 +151,30 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  routeDetailsScreenState.asignedBusList[index].startTime?.toString() ?? "",
+                                  routeDetailsScreenState
+                                          .asignedBusList[index].startTime
+                                          ?.toString() ??
+                                      "",
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
                                 ),
                                 IconButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (context) => BusTrackingScreen(
-                                                busName:
-                                                    routeDetailsScreenState.asignedBusList[index].bus?.toString() ?? "",
-                                                routeId: widget.routeId,
-                                              )));
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BusTrackingScreen(
+                                                    busName:
+                                                        routeDetailsScreenState
+                                                                .asignedBusList[
+                                                                    index]
+                                                                .bus
+                                                                ?.name
+                                                                ?.toString() ??
+                                                            "",
+                                                    routeId: widget.routeId,
+                                                  )));
                                     },
                                     icon: const Icon(Icons.arrow_forward))
                               ],
