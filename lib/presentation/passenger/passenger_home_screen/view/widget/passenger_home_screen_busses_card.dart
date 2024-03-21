@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
+import 'package:bus_tracking_application/core/constants/image_constants.dart';
 import 'package:bus_tracking_application/presentation/passenger/bus_tracking_screen/view/bus_tracking_screen.dart';
 import 'package:bus_tracking_application/repository/api/passenger/route_details_screen/models/route_and_bus_details_res_model.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +52,12 @@ class PassengerHomeScreenBussesCard extends StatelessWidget {
               ]),
           child: Row(
             children: [
-              CircleAvatar(
-                radius: 30,
-                backgroundImage: FileImage(File(imagePath)),
+              Container(
+                height: 80,
+                width: 100,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(ImageConstants.blueBusPng))),
               ),
               SizedBox(width: 20),
               Column(

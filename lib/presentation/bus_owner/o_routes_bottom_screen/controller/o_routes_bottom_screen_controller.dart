@@ -185,4 +185,12 @@ class ORoutesBottomScreenControlller with ChangeNotifier {
     print("$selectedEndTime - endTime");
     notifyListeners();
   }
+
+  clearData() {
+    selectedBus = null;
+    selectedDriver = null;
+    selectedStartTime = null;
+    selectedEndTime = null;
+    notifyListeners();
+  }
 }

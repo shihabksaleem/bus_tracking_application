@@ -112,6 +112,10 @@ class _ORoutesBottomScreenState extends State<ORoutesBottomScreen> {
                                     ),
                                     IconButton(
                                         onPressed: () {
+                                          Provider.of<ORoutesBottomScreenControlller>(
+                                                  context,
+                                                  listen: false)
+                                              .clearData();
                                           assignBuses(
                                               routeid: routesScreenState
                                                       .routesListResModel
