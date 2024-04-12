@@ -115,12 +115,37 @@ class GetStartedScreen extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                      color: ColorConstants.mainLightBlue,
+                      color: ColorConstants.lightyellow,
                       borderRadius: BorderRadius.circular(10)),
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: Center(
                       child: Text(
                     "Bus Owner",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  )),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: InkWell(
+                onTap: () {
+                  //      navigate to admin screen
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AdminLoginScreen(),
+                      ));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: ColorConstants.lightPink,
+                      borderRadius: BorderRadius.circular(10)),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: Center(
+                      child: Text(
+                    "Admin",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   )),
                 ),

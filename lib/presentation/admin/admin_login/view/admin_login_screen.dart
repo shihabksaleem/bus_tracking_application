@@ -37,7 +37,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
               children: [
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Image.asset(ImageConstants.loginRegistrationPng)),
+                    child: Image.asset(ImageConstants.busesPng)),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(

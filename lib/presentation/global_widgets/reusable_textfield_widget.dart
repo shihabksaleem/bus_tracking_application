@@ -75,6 +75,7 @@ class ReusableTextFieldWidget extends StatelessWidget {
     this.obscureText = false,
     this.suffix,
     this.prefixIcon,
+    this.fillColor,
   });
 
   final String name;
@@ -113,6 +114,7 @@ class ReusableTextFieldWidget extends StatelessWidget {
   final bool obscureText;
   final Widget? suffix;
   final Widget? prefixIcon;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -134,13 +136,16 @@ class ReusableTextFieldWidget extends StatelessWidget {
               controller: controller,
               obscureText: obscureText,
               decoration: InputDecoration(
+                fillColor: fillColor,
+                filled: true,
                 prefixIcon: prefixIcon,
                 labelText: hinttext ?? name,
                 hintText: hinttext ?? name,
                 border: OutlineInputBorder(),
                 suffixIcon: suffix,
                 isDense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               ),
               validator: validator,
               autovalidateMode: autovalidateMode,

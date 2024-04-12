@@ -1,5 +1,5 @@
 import 'package:bus_tracking_application/presentation/admin/admin_Request/view/admin_request.dart';
-import 'package:bus_tracking_application/presentation/admin/admin_bus_route/view/admin_bus_route.dart';
+import 'package:bus_tracking_application/presentation/admin/admin_bus_route_bottom_tab/view/admin_bus_route_bottom_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,11 @@ class AdminHomeScreen extends StatefulWidget {
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
   int index = 0;
-  List bottomscreens = [AdminBusRoute(), AdminRequest(), AdminRequest()];
+  List bottomscreens = [
+    AdminBusRouteBottomTab(),
+    AdminRequest(),
+    AdminRequest()
+  ];
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@
 import 'package:bus_tracking_application/core/app_utils/app_utils.dart';
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:bus_tracking_application/core/constants/image_constants.dart';
+import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_home_screen/controller/passenger_home_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/passenger/passenger_home_screen/view/widget/passenger_home_screen_busses_card.dart';
 import 'package:bus_tracking_application/presentation/common_screen/get_started_screen/view/get_started_screen.dart';
@@ -36,6 +37,8 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
     super.initState();
   }
 
+  var contactController = TextEditingController(text: "+91 79946 20947");
+
   @override
   Widget build(BuildContext context) {
     final userHomeScreenState =
@@ -58,17 +61,49 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
                   showDialog(
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      content: Text(
-                          "Are you sure you want to sent an alert message"),
+                      backgroundColor: Colors.grey.shade300,
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "SMS will be automatically send to these contacts whenever an alert is triggered. Regular SMS charges will apply.",
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 5),
+                            color: Colors.white,
+                            child: Text("I am in danger. Please Help me Out",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.red)),
+                          ),
+                          SizedBox(height: 16),
+                          ReusableTextFieldWidget(
+                            keyboardType: TextInputType.phone,
+                            fillColor: Colors.white,
+                            name: "Contact",
+                            controller: contactController,
+                          ),
+                          SizedBox(height: 16),
+                        ],
+                      ),
                       actions: [
                         InkWell(
                           onTap: () {
                             Navigator.pop(context);
                           },
                           child: Container(
+                            color: Colors.white,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
-                            child: Text("NO"),
+                            child: Text("Cancel",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black)),
                           ),
                         ),
                         InkWell(
@@ -93,9 +128,14 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
                             });
                           },
                           child: Container(
+                            color: Colors.red,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
-                            child: Text("YES"),
+                            child: Text("Send Alert",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
                           ),
                         )
                       ],
@@ -271,6 +311,11 @@ class _PassengerHomeScreenState extends State<PassengerHomeScreen> {
                                                     .isActive
                                                     .toString() ??
                                                 "",
+                                            routeAssignments:
+                                                userHomeScreenState
+                                                    .searchResultResModel
+                                                    ?.buses?[index]
+                                                    .routeAssignments,
                                           )),
                                 ),
                               ),

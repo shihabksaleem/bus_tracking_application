@@ -6,6 +6,7 @@ import 'package:bus_tracking_application/presentation/global_widgets/reusable_lo
 import 'package:bus_tracking_application/presentation/passenger/passenger_home_screen/view/passenger_home_screen.dart';
 import 'package:bus_tracking_application/presentation/passenger/route_details_screen/controller/route_details_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../bus_tracking_screen/view/bus_tracking_screen.dart';
 
@@ -127,8 +128,20 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                       scrollDirection: Axis.vertical,
                       child: Column(
                         children: List.generate(
-                          routeDetailsScreenState.asignedBusList.length,
-                          (index) => ListTile(
+                            routeDetailsScreenState.asignedBusList.length,
+                            (index) {
+                          // Parse the time string
+                          DateTime? time = DateFormat('HH:mm:ss').tryParse(
+                              routeDetailsScreenState
+                                  .asignedBusList[index].startTime
+                                  .toString());
+                          String? time12Hour;
+                          // Format the time to 12-hour format with AM/PM
+                          if (time != null) {
+                            time12Hour = DateFormat('h:mm a').format(time);
+                          }
+
+                          return ListTile(
                             leading: Icon(Icons.directions_bus,
                                 color: ColorConstants.iconBlue),
                             title: Text(
@@ -151,10 +164,7 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  routeDetailsScreenState
-                                          .asignedBusList[index].startTime
-                                          ?.toString() ??
-                                      "",
+                                  time12Hour ?? "",
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -179,8 +189,8 @@ class _RouteDetailsScreenState extends State<RouteDetailsScreen> {
                                     icon: const Icon(Icons.arrow_forward))
                               ],
                             ),
-                          ),
-                        ),
+                          );
+                        }),
                       ),
                     ),
                   )
