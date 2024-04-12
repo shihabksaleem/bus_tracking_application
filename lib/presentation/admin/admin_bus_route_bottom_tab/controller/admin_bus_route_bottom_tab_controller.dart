@@ -1,5 +1,5 @@
-import 'package:bus_tracking_application/repository/api/admin/admin_home_screen/models/a_bus_routes_res_model.dart';
-import 'package:bus_tracking_application/repository/api/admin/admin_home_screen/service/admin_home_screen_service.dart';
+import 'package:bus_tracking_application/repository/api/admin/admin_bus_routes_bottom_tab/models/a_bus_routes_res_model.dart';
+import 'package:bus_tracking_application/repository/api/admin/admin_bus_routes_bottom_tab/service/admin_bus_routes_bottom_tab_service.dart';
 import 'package:flutter/material.dart';
 
 class AdminRoutesBottomTabController extends ChangeNotifier {
@@ -14,7 +14,8 @@ class AdminRoutesBottomTabController extends ChangeNotifier {
 
     try {
       // need to update values from  user input
-      final fetchedData = await AdminBusRoutesBottomTab().getRoutesList();
+      final fetchedData =
+          await AdminBusRoutesBottomTabService().getRoutesList();
       if (fetchedData.error != true) {
         routesListResModel = fetchedData.data;
 
@@ -43,7 +44,8 @@ class AdminRoutesBottomTabController extends ChangeNotifier {
 
     try {
       // need to update values from  user input
-      final fetchedData = await AdminBusRoutesBottomTab().addNewRoute(body: {
+      final fetchedData =
+          await AdminBusRoutesBottomTabService().addNewRoute(body: {
         "name": name,
         "starts_from": from,
         "ends_at": to,

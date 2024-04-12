@@ -1,5 +1,5 @@
 import 'package:bus_tracking_application/presentation/admin/admin_bus_route_bottom_tab/controller/admin_bus_route_bottom_tab_controller.dart';
-import 'package:bus_tracking_application/presentation/admin/admin_bus_stop/view/admin_bus_Stop.dart';
+import 'package:bus_tracking_application/presentation/admin/admin_bus_stops_screen/view/admin_bus_stops_screen.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -82,7 +82,14 @@ class _AdminBusRouteBottomTabState extends State<AdminBusRouteBottomTab> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  AdminBusStop()));
+                                                  AdminBusStopsScreen(
+                                                    routeId: provider
+                                                            .routesListResModel
+                                                            ?.route?[index]
+                                                            .id
+                                                            .toString() ??
+                                                        "",
+                                                  )));
                                     },
                                     icon: Icon(
                                       Icons.add,
@@ -164,12 +171,12 @@ class _AdminBusRouteBottomTabState extends State<AdminBusRouteBottomTab> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     MaterialButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (routenameKey.currentState!.validate() &&
                             sourceKey.currentState!.validate() &&
                             destiKey.currentState!.validate()) {
                           Navigator.pop(context);
-                          context
+                          await context
                               .read<AdminRoutesBottomTabController>()
                               .addNewRoute(
                                 name: routeNameController.text.trim(),
