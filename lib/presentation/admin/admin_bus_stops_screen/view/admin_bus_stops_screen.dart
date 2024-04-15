@@ -110,11 +110,17 @@ class _AdminBusStopsScreenState extends State<AdminBusStopsScreen> {
 
   void _showBottomSheet_AddBustop(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
         return Padding(
-          padding: const EdgeInsets.only(left: 10.0, right: 10, top: 25),
+          padding: EdgeInsets.only(
+              left: 10.0,
+              right: 10,
+              top: 25,
+              bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               // ///first textfield for source input

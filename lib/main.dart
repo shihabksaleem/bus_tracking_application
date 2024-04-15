@@ -2,6 +2,7 @@ import 'package:bus_tracking_application/app_config/app_config_controller.dart';
 import 'package:bus_tracking_application/presentation/admin/admin_bus_route_bottom_tab/controller/admin_bus_route_bottom_tab_controller.dart';
 import 'package:bus_tracking_application/presentation/admin/admin_bus_stops_screen/controller/admin_bus_stops_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/admin/admin_login/controller/admin_login_screen_controller.dart';
+import 'package:bus_tracking_application/presentation/admin/admin_owners_bottom_tab/controller/admin_owners_bottom_tab_controller.dart';
 import 'package:bus_tracking_application/presentation/admin/admin_registration/controller/admin_registration_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_login_screen/controller/bus_owner_login_screen_controller.dart';
 import 'package:bus_tracking_application/presentation/bus_owner/bus_owner_registration_screen/controller/bus_owner_registration_screen_controller.dart';
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
             create: (context) => AdminRoutesBottomTabController()),
         ChangeNotifierProvider(
             create: (context) => AdminBusStopsScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => AdminOwnersBottomTabController()),
       ],
       child: MaterialApp(
         navigatorKey: AppConfigController.navigatorState,

@@ -27,12 +27,12 @@ class ReusableDrawerWidget extends StatelessWidget {
                 ///todo: image of the user
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.red,
+                    color: Colors.white,
                     image: DecorationImage(
                         image: AssetImage(
-                          ImageConstants.loginRegistrationPng,
+                          ImageConstants.busesPng,
                         ),
-                        fit: BoxFit.fill),
+                        fit: BoxFit.contain),
                     boxShadow: [
                       BoxShadow(
                           color: Colors.black, spreadRadius: 0.1, blurRadius: 1)

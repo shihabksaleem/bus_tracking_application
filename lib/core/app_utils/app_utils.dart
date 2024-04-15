@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bus_tracking_application/app_config/app_config_controller.dart';
 import 'package:bus_tracking_application/core/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -131,10 +132,14 @@ class AppUtils {
     required BuildContext context,
     bool showOnTop = false,
   }) {
-    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(
+      AppConfigController.navigatorState.currentContext!,
+    ).clearSnackBars();
 
     ///To CLEAR PREVIOUS SNACK BARS
-    return ScaffoldMessenger.of(context)
+    return ScaffoldMessenger.of(
+      AppConfigController.navigatorState.currentContext!,
+    )
         // ScaffoldMessenger.of(context??Routes.router.routerDelegate.navigatorKey.currentState!.context)
         .showSnackBar(
       SnackBar(

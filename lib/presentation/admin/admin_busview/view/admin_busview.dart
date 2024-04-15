@@ -43,12 +43,12 @@ class AdminBusView extends StatelessWidget {
                             const Color.fromARGB(255, 130, 175, 212),
                         child: IconButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => _busimage(),
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => _busimage(),
+                            //   ),
+                            // );
                           },
                           icon: Icon(
                             Icons.bus_alert_sharp,
@@ -63,12 +63,12 @@ class AdminBusView extends StatelessWidget {
                         backgroundColor: Color.fromARGB(255, 186, 103, 97),
                         child: IconButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => _rcbookimage(),
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => _rcbookimage(),
+                            //   ),
+                            // );
                           },
                           icon: Icon(
                             Icons.book,
@@ -117,8 +117,4 @@ class AdminBusView extends StatelessWidget {
       ),
     );
   }
-
-  _rcbookimage() {} // add rc book image
-
-  _busimage() {} // add bus image
 }

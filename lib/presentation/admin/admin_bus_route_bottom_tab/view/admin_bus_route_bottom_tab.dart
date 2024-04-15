@@ -3,6 +3,7 @@ import 'package:bus_tracking_application/presentation/admin/admin_bus_stops_scre
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_textfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class AdminBusRouteBottomTab extends StatefulWidget {
@@ -119,11 +120,17 @@ class _AdminBusRouteBottomTabState extends State<AdminBusRouteBottomTab> {
 
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
           return Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 10, top: 25),
+            padding: EdgeInsets.only(
+                left: 10.0,
+                right: 10,
+                top: 25,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ///first textfield for source input

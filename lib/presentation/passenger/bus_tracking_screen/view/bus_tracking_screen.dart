@@ -1,6 +1,7 @@
 import 'package:bus_tracking_application/presentation/global_widgets/reusable_loading_widget.dart';
 import 'package:bus_tracking_application/presentation/passenger/route_details_screen/controller/route_details_screen_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
@@ -104,6 +105,19 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
   ) {
     final routeDetailsScreenState =
         Provider.of<RouteDetailsScreenController>(context);
+    // Parse the time string
+    DateTime? time = DateFormat('HH:mm:ss').tryParse(routeDetailsScreenState
+            .routeAndBusDetailsResModel
+            ?.routeDetails
+            ?.stopsList?[index]
+            .timeTaken
+            .toString() ??
+        "");
+    String? time12Hour;
+    // Format the time to 12-hour format with AM/PM
+    if (time != null) {
+      time12Hour = DateFormat('h:mm a').format(time);
+    }
 
     return TimelineTile(
       alignment: TimelineAlign.manual,
@@ -113,7 +127,7 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
       indicatorStyle: IndicatorStyle(
           width: 40,
           height: 30,
-          color: index == 0 ? Colors.grey : ColorConstants.iconBlue,
+          color: index == 0 ? Colors.red.shade300 : Colors.grey.shade300,
           iconStyle: IconStyle(iconData: Icons.directions_bus)),
       afterLineStyle: const LineStyle(
         thickness: 2,
@@ -121,14 +135,12 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
       ),
       beforeLineStyle: const LineStyle(
         thickness: 2,
-        color: Colors.red,
+        color: Colors.blue,
       ),
       startChild: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Text(
-          routeDetailsScreenState.routeAndBusDetailsResModel?.routeDetails
-                  ?.stopsList?[index].timeTaken ??
-              "",
+          time12Hour ?? "",
           style: TextStyle(
             fontSize: 16,
             fontWeight: index == 0 ? FontWeight.bold : FontWeight.normal,
@@ -143,7 +155,7 @@ class _BusTrackingScreenState extends State<BusTrackingScreen> {
                     ?.stopsList?[index].stopName ??
                 "",
             style: TextStyle(
-              color: index == 0 ? Colors.grey : ColorConstants.iconBlue,
+              color: index == 0 ? Colors.red : ColorConstants.iconBlue,
             )),
       ),
     );
