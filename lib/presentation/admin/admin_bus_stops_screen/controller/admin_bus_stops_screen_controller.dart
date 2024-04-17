@@ -46,9 +46,9 @@ class AdminBusStopsScreenController extends ChangeNotifier {
       // need to update values from  user input
       final fetchedData = await AdminBusStopsScreenService().addNewStop(
         body: {
-          "stop_name": name,
+          "stop_names": name,
           "time_taken": time,
-          "approx_cost": double.tryParse(cost),
+          "approx_costs": double.tryParse(cost),
         },
         routeId: routeId,
       );

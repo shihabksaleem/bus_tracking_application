@@ -88,8 +88,8 @@ class PassengerHomeScreenController extends ChangeNotifier {
 
     try {
       // need to update values from  user input
-      final fetchedData =
-          await PassengerHomeScreenService().sendAlert(body: {});
+      final fetchedData = await PassengerHomeScreenService()
+          .sendAlert(body: {"number": "+917994620947"});
       if (fetchedData.error != true) {
         notifyListeners();
         isLoading = false;
