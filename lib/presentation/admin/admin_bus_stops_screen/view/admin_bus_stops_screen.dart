@@ -91,6 +91,18 @@ class _AdminBusStopsScreenState extends State<AdminBusStopsScreen> {
                                           "Approximate Cost: Rs 2${porvider.stopsRes?.route?.stops?[index].approxCost}"),
                                     ],
                                   ),
+                                  trailing: CircleAvatar(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 186, 103, 97),
+                                    child: IconButton(
+                                        onPressed: () {
+                                          //Todo:delete
+                                        },
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.white,
+                                        )),
+                                  ),
                                 ),
                               );
                             },

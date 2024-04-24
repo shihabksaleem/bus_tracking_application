@@ -60,47 +60,66 @@ class _OBusesBottomScreenState extends State<OBusesBottomScreen> {
                       decoration: BoxDecoration(
                         color: Color(0xFFC8E6C9),
                       ),
-                      child: ListTile(
-                        leading: Image.asset(ImageConstants.busesPng),
-                        title: Text(
-                          busDetails.name ?? "",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Owner : ${busDetails.busowner ?? ""}",
+                      child: Column(
+                        children: [
+                          Image.asset(ImageConstants.busesPng),
+                          ListTile(
+                            title: Text(
+                              busDetails.name?.toUpperCase() ?? "",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text("Bus no:${busDetails.numberPlate ?? ""}",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text("Engine Number: ${busDetails.engineNo ?? ""}",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(
-                                "Rc Book: ${busDetails.rcBook ?? "Not Updated"}",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(
-                                "Is Active: ${busDetails.isActive == true ? "Active" : "Inactive"}",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-
-                        // Todo: uncomment if needed  to bus edit  and delete
-                        // trailing: Row(
-                        //   mainAxisSize: MainAxisSize.min,
-                        //   children: [
-                        //     IconButton(
-                        //       onPressed: () {},
-                        //       icon: Icon(Icons.edit_outlined),
-                        //     ),
-                        //     IconButton(
-                        //       onPressed: () {},
-                        //       icon: Icon(Icons.delete_outline_rounded),
-                        //       color: Colors.red,
-                        //     ),
-                        //   ],
-                        // ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Owner : ${busDetails.busowner ?? ""}",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text("Bus no:${busDetails.numberPlate ?? ""}",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                Text(
+                                    "Engine Number: ${busDetails.engineNo ?? ""}",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
+                                // Text(
+                                //     "Rc Book: ${busDetails.rcBook ?? "Not Updated"}",
+                                //     style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text(
+                                    "Is Active: ${busDetails.isActive == true ? "Active" : "Inactive"}",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ],
+                            ),
+                            trailing: CircleAvatar(
+                              backgroundColor: Color.fromARGB(255, 8, 132, 45),
+                              child: IconButton(
+                                  onPressed: () {
+                                    //Todo:delete
+                                  },
+                                  icon: Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                  )),
+                            ),
+                            // Todo: uncomment if needed  to bus edit  and delete
+                            // trailing: Row(
+                            //   mainAxisSize: MainAxisSize.min,
+                            //   children: [
+                            //     IconButton(
+                            //       onPressed: () {},
+                            //       icon: Icon(Icons.edit_outlined),
+                            //     ),
+                            //     IconButton(
+                            //       onPressed: () {},
+                            //       icon: Icon(Icons.delete_outline_rounded),
+                            //       color: Colors.red,
+                            //     ),
+                            //   ],
+                            // ),
+                          ),
+                        ],
                       ),
                     );
                   },

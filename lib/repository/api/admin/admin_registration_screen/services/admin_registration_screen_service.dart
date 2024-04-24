@@ -6,7 +6,7 @@ class AdminRegistrationScreenService {
       {required Map<String, dynamic> body}) async {
     final APIResponse response = await ApiHelper.postData(
         body: body,
-        endPoint: "/admin/register/",
+        endPoint: "/Admin/register/",
         header: ApiHelper.getApiHeader());
     if (response.error) {
       return response;

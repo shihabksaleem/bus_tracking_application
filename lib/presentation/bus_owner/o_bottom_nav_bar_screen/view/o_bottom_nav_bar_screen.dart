@@ -33,8 +33,8 @@ class _OBottomNavBarScreenState extends State<OBottomNavBarScreen> {
     return Scaffold(
       appBar: AppBar(),
       drawer: ReusableDrawerWidget(
-        name: 'username',
-        email: 'address',
+        name: 'Bus Owner',
+        email: "",
         drawerItems: [
           DrawerItem(
               icon: Icons.filter_list_alt,

@@ -101,6 +101,17 @@ class _OwnerDriverScreenState extends State<OwnerDriverScreen> {
                         //     onPressed: () {},
                         //     icon: Icon(Icons.delete_outline_rounded,
                         //         size: 35, color: Colors.red)),
+                        CircleAvatar(
+                          backgroundColor: Color.fromARGB(255, 186, 103, 97),
+                          child: IconButton(
+                              onPressed: () {
+                                //Todo:delete
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                              )),
+                        ),
                       ],
                     ),
                   );

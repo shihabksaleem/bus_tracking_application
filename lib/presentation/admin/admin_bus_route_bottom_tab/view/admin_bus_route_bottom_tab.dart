@@ -100,16 +100,18 @@ class _AdminBusRouteBottomTabState extends State<AdminBusRouteBottomTab> {
                               SizedBox(
                                 width: 20,
                               ),
-                              // CircleAvatar(
-                              //   backgroundColor:
-                              //       Color.fromARGB(255, 186, 103, 97),
-                              //   child: IconButton(
-                              //       onPressed: () {},
-                              //       icon: Icon(
-                              //         Icons.delete,
-                              //         color: Colors.white,
-                              //       )),
-                              // ),
+                              CircleAvatar(
+                                backgroundColor:
+                                    Color.fromARGB(255, 186, 103, 97),
+                                child: IconButton(
+                                    onPressed: () {
+                                      //Todo:delete
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.white,
+                                    )),
+                              ),
                             ],
                           ),
                         ),

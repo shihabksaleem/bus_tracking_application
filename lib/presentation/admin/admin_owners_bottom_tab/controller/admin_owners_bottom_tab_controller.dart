@@ -40,7 +40,7 @@ class AdminOwnersBottomTabController extends ChangeNotifier {
     try {
       // need to update values from  user input
       final fetchedData = await AdminOwnersBottomTabService().approveOwners(
-        ownerId: "ownerId",
+        ownerId: ownerId,
       );
       if (fetchedData.error != true) {
         await getOwners();
