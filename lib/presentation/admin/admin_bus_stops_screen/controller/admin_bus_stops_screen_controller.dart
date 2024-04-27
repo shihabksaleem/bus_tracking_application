@@ -68,4 +68,31 @@ class AdminBusStopsScreenController extends ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> delteStop(
+      {required String stopId, required String routeId}) async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      // need to update values from  user input
+      final fetchedData = await AdminBusStopsScreenService()
+          .delteStop(routeId: routeId, stopId: stopId);
+      if (fetchedData.error != true) {
+        await getBusRouteStops(routeId: routeId);
+
+        isLoading = false;
+        notifyListeners();
+        return true;
+      } else {
+        isLoading = false;
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
 }

@@ -16,6 +16,19 @@ class AdminBusRoutesBottomTabService {
     }
   }
 
+  Future<APIResponse> delteRoutes({required String routeId}) async {
+    final APIResponse response = await ApiHelper.deleteData(
+        body: {},
+        endPoint: "/Admin/route/$routeId/",
+        header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+    if (response.error) {
+      return response;
+    } else {
+      AGetRoutesResModel redData = AGetRoutesResModel.fromJson(response.data);
+      return APIResponse(data: redData, error: false, errorMessage: '');
+    }
+  }
+
   Future<APIResponse> addNewRoute({required Map<String, dynamic> body}) async {
     final APIResponse response = await ApiHelper.postData(
         endPoint: "/Admin/route/",

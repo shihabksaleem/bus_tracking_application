@@ -104,8 +104,15 @@ class _OwnerDriverScreenState extends State<OwnerDriverScreen> {
                         CircleAvatar(
                           backgroundColor: Color.fromARGB(255, 186, 103, 97),
                           child: IconButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 //Todo:delete
+
+                                await context
+                                    .read<ODriverBottomScreenController>()
+                                    .delteDriver(
+                                        driverId: driversScreenState
+                                            .driversList[index].id
+                                            .toString());
                               },
                               icon: Icon(
                                 Icons.delete,

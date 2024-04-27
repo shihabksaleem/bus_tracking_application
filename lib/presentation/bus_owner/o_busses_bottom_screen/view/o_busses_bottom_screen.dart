@@ -97,6 +97,11 @@ class _OBusesBottomScreenState extends State<OBusesBottomScreen> {
                               child: IconButton(
                                   onPressed: () {
                                     //Todo:delete
+
+                                    context
+                                        .read<OBussesBottomScreenController>()
+                                        .deleteBus(
+                                            busId: busDetails.id.toString());
                                   },
                                   icon: Icon(
                                     Icons.delete,

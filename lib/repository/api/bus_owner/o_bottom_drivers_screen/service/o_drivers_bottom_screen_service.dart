@@ -15,4 +15,17 @@ class ODriversBottomScreenService {
       return APIResponse(data: redData, error: false, errorMessage: '');
     }
   }
+
+  Future<APIResponse> delteDriver({required String driverId}) async {
+    final APIResponse response = await ApiHelper.deleteData(
+        body: {},
+        endPoint: "/owner/busdriver/$driverId/",
+        header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+    if (response.error) {
+      return response;
+    } else {
+      // DriverListResModel redData = DriverListResModel.fromJson(response.data);
+      return APIResponse(data: "redData", error: false, errorMessage: '');
+    }
+  }
 }

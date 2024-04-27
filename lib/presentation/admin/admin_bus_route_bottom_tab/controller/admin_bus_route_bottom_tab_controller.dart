@@ -34,6 +34,32 @@ class AdminRoutesBottomTabController extends ChangeNotifier {
     }
   }
 
+  // to Fetch the Course demo videos
+  Future<bool> deleteBusRoute({required String routeId}) async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      // need to update values from  user input
+      final fetchedData =
+          await AdminBusRoutesBottomTabService().delteRoutes(routeId: routeId);
+      if (fetchedData.error != true) {
+        await getRoutesList();
+        isLoading = false;
+        notifyListeners();
+        return true;
+      } else {
+        isLoading = false;
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
+
   Future<bool> addNewRoute({
     required String name,
     required String from,

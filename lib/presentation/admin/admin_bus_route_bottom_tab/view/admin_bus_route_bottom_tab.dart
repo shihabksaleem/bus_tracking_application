@@ -104,8 +104,19 @@ class _AdminBusRouteBottomTabState extends State<AdminBusRouteBottomTab> {
                                 backgroundColor:
                                     Color.fromARGB(255, 186, 103, 97),
                                 child: IconButton(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       //Todo:delete
+                                      print("delete route");
+                                      await context
+                                          .read<
+                                              AdminRoutesBottomTabController>()
+                                          .deleteBusRoute(
+                                              routeId: provider
+                                                      .routesListResModel
+                                                      ?.route?[index]
+                                                      .id
+                                                      .toString() ??
+                                                  "");
                                     },
                                     icon: Icon(
                                       Icons.delete,

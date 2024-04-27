@@ -95,8 +95,20 @@ class _AdminBusStopsScreenState extends State<AdminBusStopsScreen> {
                                     backgroundColor:
                                         Color.fromARGB(255, 186, 103, 97),
                                     child: IconButton(
-                                        onPressed: () {
+                                        onPressed: () async {
                                           //Todo:delete
+                                          await context
+                                              .read<
+                                                  AdminBusStopsScreenController>()
+                                              .delteStop(
+                                                  stopId: porvider
+                                                          .stopsRes
+                                                          ?.route
+                                                          ?.stops?[index]
+                                                          .id
+                                                          .toString() ??
+                                                      "",
+                                                  routeId: widget.routeId);
                                         },
                                         icon: Icon(
                                           Icons.delete,

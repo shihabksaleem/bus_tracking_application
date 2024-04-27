@@ -28,4 +28,17 @@ class AdminBusStopsScreenService {
       return APIResponse(data: "redData", error: false, errorMessage: "");
     }
   }
+
+  Future<APIResponse> delteStop(
+      {required String stopId, required String routeId}) async {
+    final APIResponse response = await ApiHelper.deleteData(
+        endPoint: "/Admin/stop/$stopId/",
+        body: {},
+        header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+    if (response.error) {
+      return response;
+    } else {
+      return APIResponse(data: "redData", error: false, errorMessage: "");
+    }
+  }
 }

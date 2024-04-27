@@ -49,47 +49,72 @@ class _OBusesAssignedScreenState extends State<OBusesAssignedScreen> {
                             color: ColorConstants.mainLightBlue,
                             child: Padding(
                               padding: EdgeInsets.all(10.0),
-                              child: Row(
+                              child: Column(
                                 children: [
-                                  SizedBox(
-                                      height: 60,
-                                      child:
-                                          Image.asset(ImageConstants.busesPng)),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Image.asset(ImageConstants.busesPng),
+                                  Row(
                                     children: [
-                                      Text(
-                                          value.assignedBusList[index].route
-                                                  ?.name
-                                                  .toString()
-                                                  .toUpperCase() ??
-                                              "",
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold)),
-                                      Text(
-                                          "Bus name: ${value.assignedBusList[index].bus?.name.toString() ?? ""}",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold)),
-                                      // Text(
-                                      //     "Driver name: ${value.assignedBusList[index].?.name.toString() ?? ""}",
-                                      //     style: TextStyle(
-                                      //         fontSize: 18, fontWeight: FontWeight.bold)),
-                                      Text(
-                                          "Starting time: ${value.assignedBusList[index].startTime.toString() ?? ""}",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold)),
-                                      Text(
-                                          "Ending time: ${value.assignedBusList[index].endTime.toString() ?? ""}",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              value.assignedBusList[index].route
+                                                      ?.name
+                                                      .toString()
+                                                      .toUpperCase() ??
+                                                  "",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold)),
+                                          Text(
+                                              "Bus name: ${value.assignedBusList[index].bus?.name.toString() ?? ""}",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold)),
+                                          // Text(
+                                          //     "Driver name: ${value.assignedBusList[index].?.name.toString() ?? ""}",
+                                          //     style: TextStyle(
+                                          //         fontSize: 18, fontWeight: FontWeight.bold)),
+                                          Text(
+                                              "Starting time: ${value.assignedBusList[index].startTime.toString() ?? ""}",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold)),
+                                          Text(
+                                              "Ending time: ${value.assignedBusList[index].endTime.toString() ?? ""}",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold)),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      CircleAvatar(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 186, 103, 97),
+                                        child: IconButton(
+                                            onPressed: () async {
+                                              //Todo:delete
+
+                                              await context
+                                                  .read<
+                                                      OBussesAssignedScreenController>()
+                                                  .delteAssignedBus(
+                                                      busId: value
+                                                          .assignedBusList[
+                                                              index]
+                                                          .id
+                                                          .toString(),
+                                                      routeId: widget.routeId);
+                                            },
+                                            icon: Icon(
+                                              Icons.delete,
+                                              color: Colors.white,
+                                            )),
+                                      ),
                                     ],
                                   ),
                                 ],

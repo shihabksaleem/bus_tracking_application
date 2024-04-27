@@ -32,4 +32,29 @@ class ODriverBottomScreenController with ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> delteDriver({required String driverId}) async {
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      // need to update values from  user input
+      final fetchedData =
+          await ODriversBottomScreenService().delteDriver(driverId: driverId);
+      if (fetchedData.error != true) {
+        await getDriversList();
+        isLoading = false;
+        notifyListeners();
+        return true;
+      } else {
+        isLoading = false;
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
 }

@@ -29,4 +29,27 @@ class OBussesBottomScreenController with ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> deleteBus({required String busId}) async {
+    isLoading = true;
+    notifyListeners();
+    try {
+      final fetchedData =
+          await OwnerBusDetailsScreenService().delteBus(busId: busId);
+      if (fetchedData.error != true) {
+        getBusList();
+        isLoading = false;
+        notifyListeners();
+        return true;
+      } else {
+        isLoading = false;
+        notifyListeners();
+        return false;
+      }
+    } catch (e) {
+      isLoading = false;
+      notifyListeners();
+      return false;
+    }
+  }
 }

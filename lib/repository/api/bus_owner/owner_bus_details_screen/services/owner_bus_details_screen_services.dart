@@ -34,4 +34,16 @@ class OwnerBusDetailsScreenService {
       return APIResponse(data: redData, error: false, errorMessage: '');
     }
   }
+
+  Future<APIResponse> delteBus({required String busId}) async {
+    final APIResponse response = await ApiHelper.deleteData(
+        body: {},
+        endPoint: "/owner/bus/$busId/",
+        header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+    if (response.error) {
+      return response;
+    } else {
+      return APIResponse(data: "redData", error: false, errorMessage: '');
+    }
+  }
 }
